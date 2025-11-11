@@ -47,9 +47,17 @@ var lock_on_instance = null
 # ======================================================================
 
 func _ready():
+	# --- PERBAIKAN "RACE CONDITION" ---
+	# Tunggu 1 frame agar SEMUA node (termasuk 'get_parent()') 100% siap.
+	await get_tree().process_frame 
+	# --- AKHIR PERBAIKAN ---
+
 	# Buat instance "LockOn" sekali saja
 	if lock_on_scene:
 		lock_on_instance = lock_on_scene.instantiate()
+		# Sekarang 'get_parent()' 100% aman untuk dipanggil
+		get_parent().add_child(lock_on_instance)
+		lock_on_instance.visible = false # Sembunyikan di awal
 
 	# Hubungkan semua sinyal timer & area
 	shoot_cooldown_timer.timeout.connect(_on_shoot_cooldown_timeout)
@@ -215,15 +223,21 @@ func find_closest_target():
 	locked_target = closest_enemy
 
 func update_lock_on_visual():
+	# Pastikan instance-nya sudah ada
 	if not lock_on_instance: return 
 
+	# --- INI ADALAH LOGIKA BARU YANG ANTI-GAGAL ---
 	if locked_target:
-		if lock_on_instance.get_parent() == null:
-			locked_target.add_child(lock_on_instance)
-			lock_on_instance.global_position = locked_target.global_position
+		# Jika ada target:
+		# 1. Tampilkan target merahnya
+		lock_on_instance.visible = true
+		# 2. Pindahkan posisinya agar SAMA DENGAN posisi target
+		lock_on_instance.global_position = locked_target.global_position
 	else:
-		if lock_on_instance.get_parent() != null:
-			lock_on_instance.get_parent().remove_child(lock_on_instance)
+		# Jika tidak ada target:
+		# 1. Sembunyikan target merahnya
+		lock_on_instance.visible = false
+	# --- AKHIR LOGIKA BARU ---
 
 # ======================================================================
 # FUNGSI LOGIKA UI (PANAH)
@@ -294,7 +308,7 @@ func take_damage(amount):
 	
 	if health <= 0:
 		print("PLAYER MATI!")
-		get_tree().reload_current_scene()
+
 		
 		# ======================================================================
 # FUNGSI LOGIKA COUNTDOWN (TIMER ANGKA)

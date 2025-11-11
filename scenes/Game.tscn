@@ -99,7 +99,7 @@ offset_right = 91.0
 offset_bottom = 157.0
 scale = Vector2(0.35, 0.35)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BackgroundMap" type="TextureRect" parent="."]
 z_index = -4096
 offset_left = -3133.0
 offset_top = -1755.0

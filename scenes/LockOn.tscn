@@ -27,7 +27,9 @@ animations = [{
 }]
 
 [node name="LockOn" type="Node2D"]
-position = Vector2(0, -4)
+z_index = 4000
+position = Vector2(-100, -100)
+scale = Vector2(0.6, 0.6)
 script = ExtResource("1_hpubs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
