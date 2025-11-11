@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://fl63ylkoh1go"]
+
+[ext_resource type="Texture2D" uid="uid://b84ml7y17rqga" path="res://assets/numbers/no1.png" id="1_iuab3"]
+[ext_resource type="Script" uid="uid://b26qf2s8ew5he" path="res://scripts/NumberDisplay.gd" id="2_ri5lx"]
+
+[node name="NumberDisplay" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_iuab3")
+script = ExtResource("2_ri5lx")

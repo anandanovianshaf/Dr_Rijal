@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://wq5m7o6hlvd7"]
+
+[node name="ShootingUI" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 50
+
+[node name="Arrow1" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Arrow2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Arrow3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Arrow4" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2

@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxm5tf7ifqopj"]
+
+[ext_resource type="Texture2D" uid="uid://cf8wbjn7b88nn" path="res://assets/Object background stage/target/targeting.png" id="1_eic0r"]
+[ext_resource type="Script" uid="uid://yhqh7rvawvi7" path="res://scenes/LockOn.gd" id="1_hpubs"]
+[ext_resource type="Texture2D" uid="uid://dy57gmhb1guyf" path="res://assets/Object background stage/target/targeting-lock.png" id="2_hpubs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjrb1"]
+atlas = ExtResource("1_eic0r")
+region = Rect2(0, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndwuw"]
+atlas = ExtResource("2_hpubs")
+region = Rect2(0, 0, 600, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6p5xh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjrb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndwuw")
+}],
+"loop": true,
+"name": &"lock",
+"speed": 5.0
+}]
+
+[node name="LockOn" type="Node2D"]
+position = Vector2(0, -4)
+script = ExtResource("1_hpubs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5882353)
+position = Vector2(-270, 270)
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_6p5xh")
+animation = &"lock"

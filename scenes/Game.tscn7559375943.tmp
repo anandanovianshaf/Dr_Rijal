@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://77cdepp1xcu2"]
+
+[ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://c7l442e0awhgb" path="res://scenes/HUD.tscn" id="3_cpr0p"]
+[ext_resource type="Script" uid="uid://xq44nah1s2dl" path="res://scripts/game.gd" id="4_gw6i8"]
+[ext_resource type="Script" uid="uid://eqw6dr31eft7" path="res://scripts/enemy_spawner.gd" id="5_1kq1q"]
+
+[node name="Game" type="Node2D" groups=["player", "virus"]]
+script = ExtResource("4_gw6i8")
+
+[node name="Player" parent="." instance=ExtResource("1_qbsmt")]
+position = Vector2(-11, 13)
+speed = 500.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -7)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Virus" parent="." instance=ExtResource("2_cpr0p")]
+position = Vector2(-1435, 526)
+
+[node name="HUD" parent="." instance=ExtResource("3_cpr0p")]
+offset_left = -1902.0
+offset_top = -1033.0
+offset_right = -1862.0
+offset_bottom = -993.0
+
+[node name="GlobalTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("5_1kq1q")
+enemy_scene = ExtResource("2_cpr0p")
+spawn_interval = 2.5
+max_enemies_alive = 50
+spawn_distance = null
+spawn_random_offset = null
+
+[connection signal="health_changed" from="Player" to="HUD" method="_on_player_health_changed"]
+[connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

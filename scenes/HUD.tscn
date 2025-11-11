@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7l442e0awhgb"]
+
+[ext_resource type="Script" uid="uid://c31dehrp5214v" path="res://scripts/HUD.gd" id="1_f1f40"]
+[ext_resource type="Texture2D" uid="uid://dfswo54e0ug0g" path="res://assets/darah/darah/kantong-darah.png" id="1_wfueu"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -253.0
+offset_top = 76.0
+offset_right = -213.0
+offset_bottom = 116.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_f1f40")
+
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 1808.0
+offset_bottom = 400.0
+theme_override_constants/separation = -350
+
+[node name="HP1" type="TextureRect" parent="HealthContainer"]
+layout_mode = 2
+texture = ExtResource("1_wfueu")
+
+[node name="HP2" type="TextureRect" parent="HealthContainer"]
+layout_mode = 2
+texture = ExtResource("1_wfueu")
+
+[node name="HP3" type="TextureRect" parent="HealthContainer"]
+layout_mode = 2
+texture = ExtResource("1_wfueu")

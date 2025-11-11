@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://77cdepp1xcu2"]
+
+[ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://c7l442e0awhgb" path="res://scenes/HUD.tscn" id="3_cpr0p"]
+[ext_resource type="Script" uid="uid://xq44nah1s2dl" path="res://scripts/game.gd" id="4_gw6i8"]
+[ext_resource type="Script" uid="uid://eqw6dr31eft7" path="res://scripts/enemy_spawner.gd" id="5_1kq1q"]
+[ext_resource type="Texture2D" uid="uid://jrtnpxrrw4s2" path="res://assets/Background stage/Background stage/border-camera.png" id="6_aug50"]
+[ext_resource type="Texture2D" uid="uid://baaypbcyghrm1" path="res://assets/Background stage/Background stage/placeholder-btn-arrow.png" id="7_pharw"]
+[ext_resource type="PackedScene" uid="uid://wq5m7o6hlvd7" path="res://scenes/ShootingUI.tscn" id="9_shui0"]
+
+[node name="Game" type="Node2D" groups=["player", "virus"]]
+script = ExtResource("4_gw6i8")
+
+[node name="Player" parent="." instance=ExtResource("1_qbsmt")]
+position = Vector2(-11, 13)
+speed = 500.0
+
+[node name="Camera2D" type="Camera2D" parent="Player" groups=["camera"]]
+
+[node name="Virus" parent="." instance=ExtResource("2_cpr0p")]
+position = Vector2(-1184, 598)
+
+[node name="GlobalTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("5_1kq1q")
+enemy_scene = ExtResource("2_cpr0p")
+spawn_interval = 2.5
+max_enemies_alive = 50
+
+[node name="BorderLayer" type="CanvasLayer" parent="." groups=["camera"]]
+
+[node name="BorderImage" type="TextureRect" parent="BorderLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_aug50")
+
+[node name="BottomUI" type="Control" parent="BorderLayer"]
+clip_contents = true
+layout_mode = 3
+anchor_left = 0.22
+anchor_right = 0.78
+anchor_bottom = 1.0
+offset_left = 688.6
+offset_top = 284.0
+offset_right = 688.6
+offset_bottom = 284.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.85, 0.85)
+
+[node name="PlaceholderArrow" type="TextureRect" parent="BorderLayer/BottomUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("7_pharw")
+stretch_mode = 6
+
+[node name="ShootingUI" parent="BorderLayer/BottomUI" groups=["shooting_ui"] instance=ExtResource("9_shui0")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+offset_left = 400.0
+offset_top = -260.0
+offset_right = 400.0
+offset_bottom = -196.0
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+
+[node name="HUD" parent="BorderLayer" instance=ExtResource("3_cpr0p")]
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 140.0
+
+[connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
+[connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

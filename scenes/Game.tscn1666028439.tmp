@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://77cdepp1xcu2"]
+
+[ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://c7l442e0awhgb" path="res://scenes/HUD.tscn" id="3_cpr0p"]
+[ext_resource type="Script" uid="uid://xq44nah1s2dl" path="res://scripts/game.gd" id="4_gw6i8"]
+[ext_resource type="Script" uid="uid://eqw6dr31eft7" path="res://scripts/enemy_spawner.gd" id="5_1kq1q"]
+[ext_resource type="Texture2D" uid="uid://jrtnpxrrw4s2" path="res://assets/Background stage/Background stage/border-camera.png" id="6_aug50"]
+[ext_resource type="Texture2D" uid="uid://baaypbcyghrm1" path="res://assets/Background stage/Background stage/placeholder-btn-arrow.png" id="7_phldr"]
+[ext_resource type="PackedScene" uid="uid://fl63ylkoh1go" path="res://scenes/NumberDisplay.tscn" id="8_qy1jj"]
+[ext_resource type="PackedScene" uid="uid://wq5m7o6hlvd7" path="res://scenes/ShootingUI.tscn" id="8_shootui"]
+[ext_resource type="Texture2D" uid="uid://dgyb4r2tnfwoq" path="res://assets/Background stage/Background stage/map.png" id="9_g4kob"]
+
+[node name="Game" type="Node2D" groups=["player", "virus"]]
+script = ExtResource("4_gw6i8")
+
+[node name="Player" parent="." instance=ExtResource("1_qbsmt")]
+position = Vector2(985, 964)
+
+[node name="Camera2D" type="Camera2D" parent="Player" groups=["camera"]]
+
+[node name="Virus" parent="." instance=ExtResource("2_cpr0p")]
+position = Vector2(-1435, 526)
+
+[node name="GlobalTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("5_1kq1q")
+enemy_scene = ExtResource("2_cpr0p")
+spawn_interval = 2.5
+max_enemies_alive = 50
+
+[node name="BorderLayer" type="CanvasLayer" parent="." groups=["camera"]]
+
+[node name="BorderImage" type="TextureRect" parent="BorderLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -1099.0
+offset_right = -330.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.0003674495
+scale = Vector2(3.4, 3)
+texture = ExtResource("6_aug50")
+stretch_mode = 2
+
+[node name="ArrowUILayer" type="CanvasLayer" parent="BorderLayer"]
+
+[node name="Placeholder" type="TextureRect" parent="BorderLayer/ArrowUILayer"]
+z_index = 5
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -893.0
+offset_top = -428.0
+offset_right = 76.84009
+offset_bottom = 220.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("7_phldr")
+
+[node name="ShootingUI" parent="BorderLayer/ArrowUILayer/Placeholder" groups=["shooting_ui"] instance=ExtResource("8_shootui")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.92004
+offset_top = -54.0
+offset_right = 105.079956
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+
+[node name="InpuTimerDisplay" parent="BorderLayer/ArrowUILayer/Placeholder" groups=["input_timer_display"] instance=ExtResource("8_qy1jj")]
+visible = false
+layout_mode = 0
+offset_left = 142.0
+offset_top = 160.0
+offset_right = 214.0
+offset_bottom = 288.0
+scale = Vector2(0.7203008, 0.7203008)
+
+[node name="HUD" parent="BorderLayer" instance=ExtResource("3_cpr0p")]
+offset_left = 50.999996
+offset_top = 117.0
+offset_right = 91.0
+offset_bottom = 157.0
+scale = Vector2(0.35, 0.35)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -4096
+offset_left = -3133.0
+offset_top = -1755.0
+offset_right = 5236.1426
+offset_bottom = 3036.0
+texture = ExtResource("9_g4kob")
+
+[connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
+[connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]
