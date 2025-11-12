@@ -73,21 +73,20 @@ var footstep_interval := 0.3 # detik antar langkah
 # ======================================================================
 
 func _ready():
-	# --- PERBAIKAN "RACE CONDITION" ---
-	# 1. TUNGGU 1 frame dulu.
-	# Ini memberi 'Stage2.gd' (induk) waktu untuk
-	# mengatur 'GameManager.current_stage = 2'.
+# 1. TUNGGU 1 frame dulu.
 	await get_tree().process_frame 
 	# --- AKHIR PERBAIKAN ---
 
-	# --- 2. LOGIKA GANTI KOSTUM (SETELAH 'await') ---
-	# Sekarang kita cek GameManager. Nilainya PASTI sudah benar (2).
-	if GameManager.current_stage == 2:
-		# (Pastikan Anda sudah preload 'player2_frames' di atas)
+	# --- 2. LOGIKA GANTI KOSTUM (VERSI BARU DENGAN STAGE 3) ---
+	# Sekarang kita cek GameManager.
+	if GameManager.current_stage == 3:
+		$AnimatedSprite2D.sprite_frames = player3_frames
+		print("Memuat kostum Player 3")
+	elif GameManager.current_stage == 2: # <-- PERBAIKAN: Gunakan 'elif'
 		$AnimatedSprite2D.sprite_frames = player2_frames
 		print("Memuat kostum Player 2")
-	else:
-		# (Pastikan Anda sudah preload 'player1_frames' di atas)
+	else: # <-- PERBAIKAN: Tambah ':' dan ganti ke player1_frames
+		# Default (Stage 1)
 		$AnimatedSprite2D.sprite_frames = player1_frames
 		print("Memuat kostum Player 1")
 	# --- AKHIR LOGIKA ---

@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="Virus-Attack"
+<<<<<<< HEAD
 run/main_scene="uid://lk7ediaqk2f"
+=======
+run/main_scene="uid://2a4txohmhno6"
+>>>>>>> 2e88c9afb0ff02c4653de817e181b25a6f27c20b
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

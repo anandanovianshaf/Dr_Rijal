@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+# --- PROPERTI (TIDAK BERUBAH) ---
 @export var speed: float = 150.0
 @export var health: int = 5
 @export var stopping_distance: float = 24.0
@@ -8,10 +9,29 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 var player_node: Node2D = null
 
+# --- TAMBAHAN 1: PRELOAD KOSTUM MONSTER ---
+# (Pastikan path .tres Anda sudah benar)
+var virus1_frames = preload("res://assets/Monster/Virus1.tres")
+var virus2_frames = preload("res://assets/Monster/Virus2.tres")
+var virus3_frames = preload("res://assets/Monster/Virus3.tres")
+# --- AKHIR TAMBAHAN 1 ---
+
 
 func _ready():
 	# Tunggu 1 frame agar semua node (termasuk Player) sudah siap
 	await get_tree().process_frame
+	
+	# --- TAMBAHAN 2: LOGIKA GANTI KOSTUM ---
+	# Cek stage saat ini dari GameManager
+	match GameManager.current_stage:
+		3:
+			animated_sprite.sprite_frames = virus3_frames
+		2:
+			animated_sprite.sprite_frames = virus2_frames
+		_: # Default (Stage 1)
+			animated_sprite.sprite_frames = virus1_frames
+	# --- AKHIR TAMBAHAN 2 ---
+	
 	_find_player()
 	animated_sprite.play("walk")
 	# Kurangi safe margin untuk menghindari dorong-mendorong berlebih
@@ -19,6 +39,7 @@ func _ready():
 	scale = virus_scale
 
 func _physics_process(_delta):
+	# (LOGIKA INI TIDAK SAYA UBAH)
 	if not _is_player_valid():
 		_find_player()
 		return
@@ -47,21 +68,20 @@ func _physics_process(_delta):
 
 # --- Fungsi bantu ---
 func _find_player():
-	# Coba cari Player lewat struktur scene dulu
+	# (LOGIKA INI TIDAK SAYA UBAH)
 	if get_parent().has_node("Player"):
 		player_node = get_parent().get_node("Player")
 	else:
-		# Jika gagal, fallback ke group 'player'
 		player_node = get_tree().get_first_node_in_group("player")
 
 func _is_player_valid() -> bool:
+	# (LOGIKA INI TIDAK SAYA UBAH)
 	return player_node != null and is_instance_valid(player_node)
 
 
 # --- Fungsi damage & kematian ---
 func take_damage(amount):
-	# Kita cek dulu apakah health masih ada
-	# (agar tidak memanggil die() berkali-kali)
+	# (LOGIKA INI TIDAK SAYA UBAH)
 	if health <= 0:
 		return
 
@@ -72,27 +92,19 @@ func take_damage(amount):
 		die()
 
 func die():
-	# 1. Hentikan semua logika AI
+	# (LOGIKA INI TIDAK SAYA UBAH)
 	set_physics_process(false)
 	velocity = Vector2.ZERO
-	
-	# 2. Matikan semua tabrakan
 	$CollisionShape2D.disabled = true
 	$AttackRange.monitoring = false
-	
-	# 3. Putar animasi mati
-	# (Pastikan Anda punya animasi "dead" di Virus.tscn)
 	animated_sprite.play("dead")
-	
-	# 4. Tunggu 1 detik (agar animasi sempat main)
 	await get_tree().create_timer(1.0).timeout
-	
-	# 5. Hapus virus
 	queue_free()
 
 
 # --- Fungsi serangan (trigger dari area AttackRange) ---
 func _on_attack_range_body_entered(body):
+	# (LOGIKA INI TIDAK SAYA UBAH)
 	if body.is_in_group("player"):
 		print("💥 Virus menyerang player!")
 		if body.has_method("take_damage"):

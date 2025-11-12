@@ -30,7 +30,7 @@ func get_current_stage_settings() -> Dictionary:
 				"arrow_count": 4,
 				"input_time": 2.0,
 				"cooldown_time": 4.0,
-				"max_enemies": 11
+				"max_enemies": 10
 			}
 		_:
 			# Default, jika 'current_stage' di-set ke angka aneh
