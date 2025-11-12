@@ -15,7 +15,7 @@ func _on_proceed() -> void:
 		get_tree().change_scene_to_file(path)
 	else:
 		print("⚠️  No stage %d – returning to main menu" % next)
-		get_tree().change_scene_to_file("res://scenes/Main/MainMenu.tscn")
+		get_tree().change_scene_to_file("res://scenes/Menu/winning.tscn")
 
 func _on_quit() -> void:
-	get_tree().change_scene_to_file("res://scenes/Main/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://scenes/Menu/MainMenu.tscn")

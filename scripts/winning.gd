@@ -3,7 +3,6 @@ extends Control
 @onready var video = $Video
 @onready var fade = $ColorRect
 @onready var prompt = $Label_Prompt      # "Press Enter to Start"
-@onready var skip_label = $Label_Skip    # "Press ESC to Skip"
 
 var fade_in_done = false
 var video_ended = false
@@ -13,7 +12,6 @@ var video_length = 28.0  # durasi video dalam detik
 func _ready():
 	# Sembunyikan label dulu
 	prompt.visible = false
-	skip_label.visible = false
 	
 	# Mulai dari layar putih
 	fade.modulate.a = 1.0
@@ -29,14 +27,12 @@ func _on_fade_out_done():
 	fade_in_done = true
 	video.play()
 	video.finished.connect(_on_video_finished)
-	skip_label.visible = true  # Muncul label skip
 
 func _on_video_finished():
 	if video_ended:
 		return
 	video_ended = true
 	video.stop()
-	skip_label.visible = false
 	prompt.visible = true      # Muncul label enter
 
 func _input(event):
@@ -61,4 +57,4 @@ func _fade_in_to_game():
 	tween.finished.connect(_go_to_game)
 
 func _go_to_game():
-	get_tree().change_scene_to_file("res://scenes/Stage1.tscn")
+	get_tree().change_scene_to_file("res://scenes/Menu/MainMenu.tscn")
