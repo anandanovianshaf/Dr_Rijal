@@ -4,10 +4,12 @@ extends CharacterBody2D
 @export var speed: float = 500.0
 var health: int = 3
 signal health_changed(new_health: int)
+signal died # <-- SINYAL BARU!
 
 # --- VARIABEL BARU UNTUK REWARD/PENALTY ---
-var is_frozen: bool = false # Status "beku" untuk penalti
-var base_speed: float = 0.0 # Untuk menyimpan kecepatan asli
+var is_frozen: bool = false
+var base_speed: float = 0.0
+var is_dead: bool = false # <-- VARIABEL BARU!
 
 # --- PRELOAD ASET ---
 var arrow_textures = {
@@ -31,19 +33,18 @@ var peluru_scene = preload("res://scenes/Bullet.tscn")
 @onready var shooting_ui = get_tree().get_first_node_in_group("shooting_ui")
 @onready var input_timer_display = get_tree().get_first_node_in_group("input_timer_display")
 @onready var target_finder = $TargetFinder
-# --- NODE TIMER BARU ---
 @onready var penalty_timer = $PenaltyTimer
 @onready var reward_timer = $RewardTimer
 
 # --- VARIABEL LOGIKA TEMBAK ---
 var state = "idle"
 var is_in_shoot_mode = false
-var sequence_to_press = [] # Urutan panah
+var sequence_to_press = [] 
 var current_input_index = 0
 var arrow_keys = ["ui_up", "ui_down", "ui_left", "ui_right"]
 
 # --- VARIABEL AUTO-LOCK ---
-var potential_targets = [] # Daftar musuh dalam jangkauan
+var potential_targets = [] 
 var locked_target = null
 var lock_on_instance = null
 
@@ -54,7 +55,7 @@ var lock_on_instance = null
 func _ready():
 	await get_tree().process_frame
 	
-	base_speed = speed # <-- SIMPAN KECEPATAN ASLI
+	base_speed = speed 
 
 	if lock_on_scene:
 		lock_on_instance = lock_on_scene.instantiate()
@@ -67,32 +68,29 @@ func _ready():
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
 	target_finder.body_entered.connect(_on_target_finder_body_entered)
 	target_finder.body_exited.connect(_on_target_finder_body_exited)
-	# --- HUBUNGKAN TIMER BARU ---
 	penalty_timer.timeout.connect(_on_penalty_timer_timeout)
 	reward_timer.timeout.connect(_on_reward_timer_timeout)
 	
-	# Mulai cooldown pertama kali
 	var settings = GameManager.get_current_stage_settings()
 	shoot_cooldown_timer.start(settings.cooldown_time)
 	health_changed.emit(health)
 
-# --- FUNGSI _physics_process YANG DIPERBARUI ---
 func _physics_process(_delta):
+	# --- JANGAN PROSES APAPUN JIKA SUDAH MATI ---
+	if is_dead:
+		return
+
 	find_closest_target()
 	update_lock_on_visual()
 
-	# --- 3. LOGIKA GERAK (DENGAN PENALTI) ---
 	if not is_frozen:
-		# Jika TIDAK beku, bergerak normal
 		var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		velocity = input_direction * speed
 		move_and_slide()
 	else:
-		# Jika BEKU, paksa berhenti
 		velocity = Vector2.ZERO
 		move_and_slide()
 
-	# --- 4. LOGIKA ANIMASI (TETAP KONDISIONAL) ---
 	if state == "idle" or state == "walk":
 		if velocity.length() > 0:
 			state = "walk"
@@ -101,7 +99,6 @@ func _physics_process(_delta):
 			state = "idle"
 			animated_sprite.play("idle")
 		
-	# --- 5. LOGIKA FLIP (JUGA DENGAN PENALTI) ---
 	if not is_frozen:
 		if velocity.x < 0:
 			animated_sprite.flip_h = false # Aset hadap KIRI
@@ -109,7 +106,12 @@ func _physics_process(_delta):
 			animated_sprite.flip_h = true # Balik hadap KANAN
 	
 func _input(event):
-	# ... (Fungsi _input Anda sudah benar, tidak perlu diubah)
+	# --- PERUBAHAN DI SINI ---
+	# Jika player MATI atau BEKU, jangan proses input tembakan
+	if is_dead or is_frozen:
+		return
+	# --- AKHIR PERUBAHAN ---
+		
 	if not is_in_shoot_mode:
 		return
 	if not event.is_pressed():
@@ -128,13 +130,12 @@ func _input(event):
 				success_shot()
 		else:
 			print("Panah SALAH!")
-			fail_shot()	
+			fail_shot()
 # ======================================================================
 # FUNGSI LOGIKA TEMBAK (AYODANCE)
 # ======================================================================
 
 func start_shooting_sequence():
-	# ... (Fungsi ini sudah benar, tidak perlu diubah)
 	if locked_target == null:
 		var settings = GameManager.get_current_stage_settings()
 		shoot_cooldown_timer.start(settings.cooldown_time)
@@ -155,7 +156,6 @@ func start_shooting_sequence():
 	input_timer.start(input_time)
 	start_visual_countdown() 
 
-# --- FUNGSI success_shot YANG DIPERBARUI ---
 func success_shot():
 	is_in_shoot_mode = false
 	input_timer.stop()
@@ -163,32 +163,22 @@ func success_shot():
 	input_timer_display.visible = false
 	
 	print("REWARD: Kecepatan x1.5 selama 1 detik!")
-	speed = base_speed * 1.5 # Tingkatkan kecepatan
-	reward_timer.start() # Mulai timer 1 detik
+	speed = base_speed * 1.5
+	reward_timer.start() 
 
 	if locked_target == null or not is_instance_valid(locked_target):
 		fail_shot() 
 		return
 
 	print("BERHASIL! Menembak ", locked_target.name)
-	# --- TAMBAHKAN LOGIKA MENEMBAK BARU INI ---
-	# 1. Buat instance (salinan) peluru
 	var new_bullet = peluru_scene.instantiate()
-
-	# 2. Beri tahu peluru siapa targetnya
 	new_bullet.target = locked_target
-
-	# 3. Atur posisi awal peluru
-	# (Gunakan $PistolPosition jika Anda buat, jika tidak, gunakan global_position)
 	if has_node("PistolPosition"):
 		new_bullet.global_position = $PistolPosition.global_position
 	else:
-		new_bullet.global_position = global_position # Spawn di tengah player
-
-	# 4. Tambahkan peluru ke dunia game (bukan ke player)
+		new_bullet.global_position = global_position
 	get_parent().add_child(new_bullet)
 
-# --- FUNGSI fail_shot YANG DIPERBARUI ---
 func fail_shot():
 	if not is_in_shoot_mode: return
 		
@@ -197,22 +187,20 @@ func fail_shot():
 	shooting_ui.hide()
 	input_timer_display.visible = false
 	
-	# --- LOGIKA PENALTI ---
 	print("PENALTI: Beku 1 detik!")
-	is_frozen = true # Bekukan player
-	penalty_timer.start() # Mulai timer 1 detik
-	# --- AKHIR PENALTI ---
+	is_frozen = true 
+	penalty_timer.start() 
 	
 	print("GAGAL MENEMBAK!")
 	state = "fail_shoot"
 	animated_sprite.play("fail_shoot")
 
 # ======================================================================
-# FUNGSI-FUNGSI LAIN (Tidak Berubah)
+# FUNGSI-FUNGSI LAIN
 # ======================================================================
 
-# --- FUNGSI LOGIKA AUTO-LOCK (TARGETING) ---
 func find_closest_target():
+	# ... (Fungsi ini tidak berubah)
 	if potential_targets.is_empty():
 		locked_target = null
 		return
@@ -228,6 +216,7 @@ func find_closest_target():
 	locked_target = closest_enemy
 
 func update_lock_on_visual():
+	# ... (Fungsi ini tidak berubah)
 	if not lock_on_instance: return 
 	if locked_target:
 		lock_on_instance.visible = true
@@ -235,8 +224,8 @@ func update_lock_on_visual():
 	else:
 		lock_on_instance.visible = false
 
-# --- FUNGSI LOGIKA UI (PANAH) ---
 func update_shooting_ui():
+	# ... (Fungsi ini tidak berubah)
 	var settings = GameManager.get_current_stage_settings()
 	var arrow_count = settings.arrow_count
 	for i in 8:
@@ -262,24 +251,31 @@ func _on_input_timer_timeout():
 	if is_in_shoot_mode:
 		fail_shot()
 
+# --- FUNGSI _on_animated_sprite_animation_finished (DIPERBARUI) ---
 func _on_animated_sprite_animation_finished():
 	var anim_name = animated_sprite.animation
 	
-	# 1. Jika 'shoot' ATAU 'fail_shoot' yang baru selesai...
 	if anim_name == "shoot" or anim_name == "fail_shoot":
-		# ...maka ubah state dan mainkan 'reload'.
 		state = "reload"
 		animated_sprite.play("reload")
 		
-	# 2. Jika 'reload' yang baru selesai...
 	elif anim_name == "reload":
-		# ...maka baru kita kembali ke 'idle' dan mulai cooldown tembak.
 		state = "idle"
 		animated_sprite.play("idle")
 		
-		# Cooldown untuk tembakan berikutnya dimulai SETELAH reload selesai.
 		var settings = GameManager.get_current_stage_settings()
 		shoot_cooldown_timer.start(settings.cooldown_time)
+
+	# --- PERUBAHAN DI SINI ---
+	elif anim_name == "hit":
+		# Animasi 'hit' selesai.
+		is_frozen = false # <-- PERUBAHAN: Berhenti beku
+		state = "idle"
+		animated_sprite.play("idle")
+	# --- AKHIR PERUBAHAN ---
+	
+	elif anim_name == "dead":
+		died.emit()
 
 func _on_target_finder_body_entered(body):
 	if body.is_in_group("virus"):
@@ -291,16 +287,56 @@ func _on_target_finder_body_exited(body):
 		if body == locked_target:
 			locked_target = null
 
-# --- Fungsi untuk diserang musuh ---
+# --- Fungsi untuk diserang musuh (DIPERBARUI) ---
+# --- Fungsi untuk diserang musuh (DIPERBARUI) ---
+# --- Fungsi untuk diserang musuh (DIPERBARUI) ---
 func take_damage(amount):
+	# --- PERUBAHAN DI SINI ---
+	# Jika player MATI atau sedang BEKU (is_frozen)
+	# 'is_frozen' akan aktif saat 'fail_shot' ATAU 'hit'
+	if is_dead or is_frozen:
+		return
+	# --- AKHIR PERUBAHAN ---
+
 	health -= amount
 	print("Player HP: ", health)
 	health_changed.emit(health)
-	if health <= 0:
-		print("PLAYER MATI!")
+	
+	if health <= 0 and not is_dead:
+		die()
+	# --- PERUBAHAN DI SINI ---
+	elif health > 0:
+		# Jika kita kena hit TAPI belum mati...
+		print("PLAYER KENA HIT! Membeku...")
+		is_frozen = true # <-- PERUBAHAN: Kembalikan 'is_frozen = true'
+		state = "hit"
+		animated_sprite.play("hit") # Mainkan animasi 'hit'
+		# Kita TIDAK menyalakan PenaltyTimer. 'is_frozen'
+		# akan dimatikan oleh animasi 'hit' saat selesai.
+	# --- AKHIR PERUBAHAN ---
+	
+	
+# --- FUNGSI KEMATIAN BARU ---
+func die():
+	is_dead = true # Set flag agar tidak bisa 'take_damage' lagi
+	is_frozen = true # Berhenti bergerak (dari _physics_process)
+	state = "dead" # Ubah state
+	
+	print("PLAYER MATI! Memainkan animasi...")
+	
+	# Matikan semua tabrakan & sensor
+	$CollisionShape2D.set_deferred("disabled", true)
+	target_finder.set_deferred("monitoring", false)
+	
+	# Mainkan animasi 'dead' (hantu)
+	animated_sprite.play("dead")
+	
+	# Kita tidak emit 'died' di sini. Kita emit di
+	# _on_animated_sprite_animation_finished agar
+	# kita TAHU animasinya sudah selesai.
 
-		
 # --- FUNGSI LOGIKA COUNTDOWN (TIMER ANGKA) ---
+# ... (Fungsi start_visual_countdown dan _run_countdown_loop tidak berubah)
 func start_visual_countdown():
 	var settings = GameManager.get_current_stage_settings()
 	var time = settings.input_time
@@ -318,16 +354,32 @@ func _run_countdown_loop(seconds_left: int):
 		seconds_left -= 1
 	input_timer_display.visible = false
 
-# ======================================================================
-# FUNGSI BARU UNTUK REWARD/PENALTI
-# ======================================================================
-
-# Dipanggil saat PenaltyTimer (1 detik) selesai
+# --- FUNGSI REWARD/PENALTI (Tidak Berubah) ---
 func _on_penalty_timer_timeout():
-	is_frozen = false # Berhenti beku
+	is_frozen = false
 	print("Penalti selesai. Player bisa gerak.")
 
-# Dipanggil saat RewardTimer (1 detik) selesai
 func _on_reward_timer_timeout():
-	speed = base_speed # Kembalikan kecepatan ke normal
+	speed = base_speed
 	print("Reward selesai. Kecepatan normal.")
+# --- FUNGSI PENYEMBUHAN (untuk Potion) ---
+func heal(amount: int):
+	if is_dead:
+		return  # kalau udah mati, gak bisa disembuhkan
+
+	# batas HP maksimal
+	var max_health = 3
+
+	if health < max_health:
+		health += amount
+		if health > max_health:
+			health = max_health
+
+		print("Player disembuhkan! HP sekarang:", health)
+		health_changed.emit(health)
+
+		# (Opsional) mainkan animasi atau efek heal
+		if animated_sprite.animation != "heal":
+			animated_sprite.play("heal")
+	else:
+		print("HP sudah penuh! Potion terbuang percuma.")

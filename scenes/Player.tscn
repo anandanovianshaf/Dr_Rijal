@@ -1,10 +1,28 @@
-[gd_scene load_steps=27 format=3 uid="uid://dlnr0n5l4fehd"]
+[gd_scene load_steps=37 format=3 uid="uid://dlnr0n5l4fehd"]
 
 [ext_resource type="Texture2D" uid="uid://ctxerft4kqpwv" path="res://assets/character 1/sprite/pose jalan.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c2ym7yvfvyp6x" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://dxm5tf7ifqopj" path="res://scenes/LockOn.tscn" id="2_wqd30"]
+[ext_resource type="Texture2D" uid="uid://bc1lyqvk8nnle" path="res://assets/darah/darah/sprite-pose-mati.png" id="3_70d11"]
 [ext_resource type="Texture2D" uid="uid://btlmm8isoltti" path="res://assets/character 1/sprite/pose relog.png" id="3_vod78"]
 [ext_resource type="Texture2D" uid="uid://fcs2kxd1kjfp" path="res://assets/character 1/sprite/pose menembak.png" id="4_wqd30"]
+[ext_resource type="Texture2D" uid="uid://bkdm3an1vxddh" path="res://assets/hit/animasi-pusing-char-vitamin c.png" id="6_cw2d6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw2d6"]
+atlas = ExtResource("3_70d11")
+region = Rect2(215, 0, 215, 311)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khinc"]
+atlas = ExtResource("3_70d11")
+region = Rect2(0, 311, 215, 311)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bruh7"]
+atlas = ExtResource("3_70d11")
+region = Rect2(215, 311, 215, 311)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eyey"]
+atlas = ExtResource("3_70d11")
+region = Rect2(0, 0, 215, 311)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vod78"]
 atlas = ExtResource("4_wqd30")
@@ -21,6 +39,22 @@ region = Rect2(222, 0, 222, 259)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0xj1c"]
 atlas = ExtResource("3_vod78")
 region = Rect2(0, 0, 222, 259)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3wef"]
+atlas = ExtResource("6_cw2d6")
+region = Rect2(0, 0, 199, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4126"]
+atlas = ExtResource("6_cw2d6")
+region = Rect2(199, 0, 199, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkdrv"]
+atlas = ExtResource("6_cw2d6")
+region = Rect2(199, 263, 199, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7iby"]
+atlas = ExtResource("6_cw2d6")
+region = Rect2(0, 263, 199, 263)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2brh"]
 atlas = ExtResource("1_3vyb7")
@@ -82,6 +116,47 @@ region = Rect2(0, 265, 176, 265)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_cw2d6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khinc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bruh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eyey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw2d6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khinc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bruh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eyey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw2d6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khinc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bruh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eyey")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vod78")
 }, {
 "duration": 1.0,
@@ -95,6 +170,26 @@ animations = [{
 }],
 "loop": false,
 "name": &"fail_shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3wef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4126")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkdrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7iby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3wef")
+}],
+"loop": false,
+"name": &"hit",
 "speed": 5.0
 }, {
 "frames": [{
@@ -182,12 +277,10 @@ collision_layer = 2
 script = ExtResource("1_g2els")
 lock_on_scene = ExtResource("2_wqd30")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
 sprite_frames = SubResource("SpriteFrames_rhr3r")
-animation = &"reload"
+animation = &"idle"
 autoplay = "idle"
-frame = 6
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_t53lx")
