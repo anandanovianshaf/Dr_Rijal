@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbjqh8sipu8yy"]
+
+[ext_resource type="Texture2D" uid="uid://c7bfvyevop0xw" path="res://assets/backgrounds/kolam.png" id="1_pacnk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
+size = Vector2(162.5, 168.125)
+
+[node name="Pool" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pacnk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -10)
+shape = SubResource("RectangleShape2D_cptd4")
