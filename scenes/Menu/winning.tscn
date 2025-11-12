@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://bchrnxbcuo7gw"]
+
+[ext_resource type="VideoStream" uid="uid://1r77i5ikhctg" path="res://assets/Background stage/Menu Assets/winning.ogv" id="1_axfs4"]
+[ext_resource type="Script" uid="uid://c27ghvpw8ccoq" path="res://scripts/winning.gd" id="1_gfejm"]
+[ext_resource type="AudioStream" uid="uid://dthc7jxld01f4" path="res://assets/Audio/3-12.mp3" id="2_gfejm"]
+
+[node name="Winning" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gfejm")
+
+[node name="Video" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_axfs4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Prompt" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 46.0
+offset_right = 460.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 40
+text = "Press Enter to Main Menu
+"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_gfejm")
+volume_db = -12.0
+autoplay = true
