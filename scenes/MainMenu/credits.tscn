@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://43adld8b7rym"]
+
+[ext_resource type="Script" uid="uid://c8wn4gu4ewpn8" path="res://scripts/Menu/credits.gd" id="1_48g4f"]
+[ext_resource type="Texture2D" uid="uid://n3ujiki3kuhk" path="res://assets/button/btn_left_one.png" id="2_8ayov"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_48g4f")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label_Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label_Teams" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label_Assets" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label_SpecialThanks" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button_Back" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -934.99994
+offset_top = -1054.0
+offset_right = -536.99994
+offset_bottom = -656.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("2_8ayov")
