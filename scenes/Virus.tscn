@@ -1,36 +1,36 @@
 [gd_scene load_steps=11 format=3 uid="uid://dliucd6k8doqo"]
 
 [ext_resource type="Script" uid="uid://dh1t4sadpsx0a" path="res://scripts/virus.gd" id="1_6tjwe"]
-[ext_resource type="Texture2D" uid="uid://5avohwmafwjk" path="res://assets/Monster/corona-prajurit-mati.png" id="2_geebn"]
-[ext_resource type="Texture2D" uid="uid://cokei3pl8541e" path="res://assets/Monster/corona-prajurit.png" id="3_r7g53"]
+[ext_resource type="Texture2D" uid="uid://dlviidyahydrc" path="res://assets/Monster/influenza-prajurit-mati.png" id="2_6tjwe"]
+[ext_resource type="Texture2D" uid="uid://ks5jhtfxgvuc" path="res://assets/Monster/influenza-prajurit.png" id="3_geebn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jilg7"]
-atlas = ExtResource("2_geebn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7g53"]
+atlas = ExtResource("2_6tjwe")
 region = Rect2(0, 0, 1024, 1024)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0kg14"]
-atlas = ExtResource("2_geebn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj7ge"]
+atlas = ExtResource("2_6tjwe")
 region = Rect2(0, 0, 1024, 1024)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1c2qo"]
-atlas = ExtResource("2_geebn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmijv"]
+atlas = ExtResource("2_6tjwe")
 region = Rect2(0, 0, 1024, 1024)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m83q2"]
-atlas = ExtResource("3_r7g53")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj3yn"]
+atlas = ExtResource("3_geebn")
 region = Rect2(0, 0, 1024, 1024)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ltkrk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jilg7")
+"texture": SubResource("AtlasTexture_r7g53")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0kg14")
+"texture": SubResource("AtlasTexture_xj7ge")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1c2qo")
+"texture": SubResource("AtlasTexture_fmijv")
 }],
 "loop": false,
 "name": &"dead",
@@ -38,7 +38,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m83q2")
+"texture": SubResource("AtlasTexture_mj3yn")
 }],
 "loop": true,
 "name": &"walk",
@@ -61,11 +61,11 @@ health = 1
 position = Vector2(-272, 234.57117)
 scale = Vector2(0.57226557, 0.57115006)
 sprite_frames = SubResource("SpriteFrames_ltkrk")
-animation = &"dead"
+animation = &"walk"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-266, 263)
+position = Vector2(-272, 229)
 shape = SubResource("CircleShape2D_jilg7")
 
 [node name="AttackRange" type="Area2D" parent="." groups=["virus"]]
@@ -74,6 +74,7 @@ scale = Vector2(0.47, 0.47)
 collision_mask = 2
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(-27.659668, -48.936172)
 shape = SubResource("CircleShape2D_1c2qo")
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

@@ -264,9 +264,20 @@ func _on_input_timer_timeout():
 
 func _on_animated_sprite_animation_finished():
 	var anim_name = animated_sprite.animation
+	
+	# 1. Jika 'shoot' ATAU 'fail_shoot' yang baru selesai...
 	if anim_name == "shoot" or anim_name == "fail_shoot":
+		# ...maka ubah state dan mainkan 'reload'.
+		state = "reload"
+		animated_sprite.play("reload")
+		
+	# 2. Jika 'reload' yang baru selesai...
+	elif anim_name == "reload":
+		# ...maka baru kita kembali ke 'idle' dan mulai cooldown tembak.
 		state = "idle"
 		animated_sprite.play("idle")
+		
+		# Cooldown untuk tembakan berikutnya dimulai SETELAH reload selesai.
 		var settings = GameManager.get_current_stage_settings()
 		shoot_cooldown_timer.start(settings.cooldown_time)
 

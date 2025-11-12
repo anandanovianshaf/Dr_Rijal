@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://7ns8elsljo6c" path="res://assets/backgrounds/pot2.png" id="1_x203e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
-size = Vector2(201.00003, 47.000008)
+size = Vector2(201.00003, 42.500008)
 
 [node name="Pot2" type="StaticBody2D"]
 collision_layer = 7
@@ -13,6 +13,6 @@ collision_mask = 7
 texture = ExtResource("1_x203e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.4999962, 6.500001)
+position = Vector2(0, -2)
 scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_cptd4")

@@ -4,7 +4,7 @@ extends Node2D
 @export var spawn_interval: float = 3.0
 @export var max_enemies_alive: int = 999
 @export var spawn_distance: float = 800.0
-@export var spawn_random_offset: float = 300.0
+@export var spawn_random_offset: float = 500.0
 
 var _timer: Timer
 
@@ -49,38 +49,28 @@ func _count_enemies() -> int:
 	return count
 
 func _get_spawn_position() -> Vector2:
+	# 1. Dapatkan posisi Player
 	var player: Node2D = get_parent().get_node_or_null("Player")
+	
+	# Fallback: Jika player tidak ada, spawn di (0,0)
 	if player == null:
 		return Vector2.ZERO
 
-	# Ambil kamera aktif di dunia (biasanya anak dari Player)
-	var cam := get_viewport().get_camera_2d()
-	if cam == null:
-		return player.global_position + Vector2(randf_range(-spawn_distance, spawn_distance), -spawn_distance)
+	# --- INI LOGIKA BARU YANG LEBIH BAIK ---
 
-	# Hitung batas pandangan kamera dalam koordinat dunia
-	var screen_size := get_viewport_rect().size * cam.zoom
-	var cam_pos := cam.global_position
+	# 2. Buat arah acak (lingkaran 360 derajat)
+	# TAU adalah konstanta bawaan Godot untuk 2 * PI (satu lingkaran penuh)
+	var random_angle = randf_range(0, TAU) 
 
-	var left := cam_pos.x - screen_size.x / 2
-	var right := cam_pos.x + screen_size.x / 2
-	var top := cam_pos.y - screen_size.y / 2
-	var bottom := cam_pos.y + screen_size.y / 2
+	# 3. Buat jarak acak dalam "cincin"
+	# Jarak minimal = spawn_distance (misal 800)
+	# Jarak maksimal = spawn_distance + spawn_random_offset (misal 800 + 500 = 1300)
+	var random_distance = randf_range(spawn_distance, spawn_distance + spawn_random_offset)
+	
+	# 4. Hitung posisi offset dari player
+	# Vector2.RIGHT.rotated(random_angle) akan memberi kita
+	# sebuah vektor arah acak (seperti jarum jam yang berputar)
+	var offset_vector = Vector2.RIGHT.rotated(random_angle) * random_distance
 
-	# Tambahkan margin di luar layar agar spawn tidak kelihatan langsung
-	var spawn_margin := 200.0  # bisa kamu ubah sesuai keadilan spawn
-	var spawn_pos := Vector2.ZERO
-
-	# Tentukan sisi mana untuk spawn: 0=atas, 1=kanan, 2=bawah, 3=kiri
-	var side := randi() % 4
-	match side:
-		0:
-			spawn_pos = Vector2(randf_range(left - spawn_margin, right + spawn_margin), top - spawn_margin)
-		1:
-			spawn_pos = Vector2(right + spawn_margin, randf_range(top - spawn_margin, bottom + spawn_margin))
-		2:
-			spawn_pos = Vector2(randf_range(left - spawn_margin, right + spawn_margin), bottom + spawn_margin)
-		_:
-			spawn_pos = Vector2(left - spawn_margin, randf_range(top - spawn_margin, bottom + spawn_margin))
-
-	return spawn_pos
+	# 5. Posisi spawn final = posisi player + offset acak
+	return player.global_position + offset_vector
