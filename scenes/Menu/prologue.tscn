@@ -33,20 +33,20 @@ grow_vertical = 2
 [node name="Label_Prompt" type="Label" parent="."]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 1523.0
-offset_top = 995.0
-offset_right = 1883.0
-offset_bottom = 1050.0
+offset_left = 104.0
+offset_top = 957.0
+offset_right = 464.0
+offset_bottom = 1012.0
 theme_override_font_sizes/font_size = 40
 text = "Press Enter to Play"
 
 [node name="Label_Skip" type="Label" parent="."]
 modulate = Color(0.021434637, 0.021434635, 0.021434633, 1)
 layout_mode = 0
-offset_left = 83.0
-offset_top = 49.0
-offset_right = 399.0
-offset_bottom = 104.0
+offset_left = 107.0
+offset_top = 953.0
+offset_right = 423.0
+offset_bottom = 1008.0
 theme_override_font_sizes/font_size = 40
 text = "Press Esc to skip"
 
