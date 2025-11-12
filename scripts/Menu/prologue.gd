@@ -61,4 +61,4 @@ func _fade_in_to_game():
 	tween.finished.connect(_go_to_game)
 
 func _go_to_game():
-	get_tree().change_scene_to_file("res://Scenes/Game.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game1.tscn")

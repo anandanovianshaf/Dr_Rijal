@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://5p6splo5a658"]
 
-[ext_resource type="Script" uid="uid://dfdnauc243as4" path="res://scripts/Stage2.gd" id="1_nqogs"]
+[ext_resource type="Script" uid="uid://0bjm6x60scba" path="res://scripts/stage3.gd" id="1_ktig7"]
 [ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="2_b5rwe"]
 [ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="3_s67mi"]
 [ext_resource type="Script" uid="uid://eqw6dr31eft7" path="res://scripts/enemy_spawner.gd" id="4_ktig7"]
@@ -35,7 +35,7 @@ size = Vector2(4629, 44.75)
 size = Vector2(35, 4651)
 
 [node name="Stage3" type="Node2D" groups=["player", "virus"]]
-script = ExtResource("1_nqogs")
+script = ExtResource("1_ktig7")
 
 [node name="Player" parent="." instance=ExtResource("2_b5rwe")]
 z_index = 10
