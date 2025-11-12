@@ -1,26 +1,51 @@
-[gd_scene load_steps=11 format=3 uid="uid://77cdepp1xcu2"]
+[gd_scene load_steps=22 format=3 uid="uid://77cdepp1xcu2"]
 
 [ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
 [ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
 [ext_resource type="PackedScene" uid="uid://c7l442e0awhgb" path="res://scenes/HUD.tscn" id="3_cpr0p"]
 [ext_resource type="Script" uid="uid://xq44nah1s2dl" path="res://scripts/game.gd" id="4_gw6i8"]
 [ext_resource type="Script" uid="uid://eqw6dr31eft7" path="res://scripts/enemy_spawner.gd" id="5_1kq1q"]
-[ext_resource type="Texture2D" uid="uid://jrtnpxrrw4s2" path="res://assets/Background stage/Background stage/border-camera.png" id="6_aug50"]
-[ext_resource type="Texture2D" uid="uid://baaypbcyghrm1" path="res://assets/Background stage/Background stage/placeholder-btn-arrow.png" id="7_phldr"]
+[ext_resource type="Texture2D" uid="uid://jrtnpxrrw4s2" path="res://assets/backgrounds/Background stage/border-camera.png" id="6_aug50"]
+[ext_resource type="Texture2D" uid="uid://baaypbcyghrm1" path="res://assets/backgrounds/Background stage/placeholder-btn-arrow.png" id="7_phldr"]
 [ext_resource type="PackedScene" uid="uid://fl63ylkoh1go" path="res://scenes/NumberDisplay.tscn" id="8_qy1jj"]
 [ext_resource type="PackedScene" uid="uid://wq5m7o6hlvd7" path="res://scenes/ShootingUI.tscn" id="8_shootui"]
-[ext_resource type="Texture2D" uid="uid://dgyb4r2tnfwoq" path="res://assets/Background stage/Background stage/map.png" id="9_g4kob"]
+[ext_resource type="Texture2D" uid="uid://dgyb4r2tnfwoq" path="res://assets/backgrounds/Background stage/map.png" id="9_g4kob"]
+[ext_resource type="PackedScene" uid="uid://e2iiras4tas8" path="res://scenes/objects/VendingMachine.tscn" id="10_3xj3m"]
+[ext_resource type="PackedScene" uid="uid://bq66nd0l0qicv" path="res://scenes/objects/Hospital.tscn" id="11_mcffj"]
+[ext_resource type="PackedScene" uid="uid://bycnpxqq8x2up" path="res://scenes/objects/Box.tscn" id="12_2rd6h"]
+[ext_resource type="PackedScene" uid="uid://8rrddtblbwga" path="res://scenes/objects/Pot.tscn" id="13_7ua8r"]
+[ext_resource type="PackedScene" uid="uid://64opa8qso355" path="res://scenes/objects/Pot2.tscn" id="14_r7sob"]
+[ext_resource type="PackedScene" uid="uid://7bqtbsehrsad" path="res://scenes/objects/Pot3.tscn" id="15_y5y3l"]
+[ext_resource type="PackedScene" uid="uid://cfy2xmqwm5vq" path="res://scenes/objects/Tree.tscn" id="16_vjgi4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjgi4"]
+size = Vector2(8360, 171)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyk2p"]
+size = Vector2(8358, 86.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45i86"]
+size = Vector2(4440, 207.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv1m6"]
+size = Vector2(58, 4496)
 
 [node name="Game" type="Node2D" groups=["player", "virus"]]
 script = ExtResource("4_gw6i8")
 
 [node name="Player" parent="." instance=ExtResource("1_qbsmt")]
-position = Vector2(985, 964)
+position = Vector2(955, 586)
 
 [node name="Camera2D" type="Camera2D" parent="Player" groups=["camera"]]
+zoom = Vector2(0.5, 0.5)
+limit_left = -3110
+limit_top = -1665
+limit_right = 5120
+limit_bottom = 3006
 
 [node name="Virus" parent="." instance=ExtResource("2_cpr0p")]
-position = Vector2(-1435, 526)
+position = Vector2(-1316, 682)
+stopping_distance = 10.0
 
 [node name="GlobalTimer" type="Timer" parent="."]
 wait_time = 60.0
@@ -99,6 +124,93 @@ offset_right = 91.0
 offset_bottom = 157.0
 scale = Vector2(0.35, 0.35)
 
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="VendingMachine" parent="Objects" instance=ExtResource("10_3xj3m")]
+position = Vector2(4290, 216)
+scale = Vector2(4.4833555, 4.4833555)
+metadata/_edit_lock_ = true
+
+[node name="Hospital" parent="Objects" instance=ExtResource("11_mcffj")]
+position = Vector2(-1328, -458)
+scale = Vector2(4.3685174, 4.3685174)
+metadata/_edit_lock_ = true
+
+[node name="Box0" parent="Objects" instance=ExtResource("12_2rd6h")]
+position = Vector2(183, 327)
+scale = Vector2(4.2586355, 4.2586355)
+metadata/_edit_lock_ = true
+
+[node name="Box1" parent="Objects" instance=ExtResource("12_2rd6h")]
+position = Vector2(-2950.9998, 685)
+scale = Vector2(4.2586355, 4.2586355)
+metadata/_edit_lock_ = true
+
+[node name="Pot0" parent="Objects" instance=ExtResource("13_7ua8r")]
+position = Vector2(297, -1001)
+scale = Vector2(4.5238094, 4.5238094)
+metadata/_edit_lock_ = true
+
+[node name="Pot1" parent="Objects" instance=ExtResource("13_7ua8r")]
+position = Vector2(2323, 533)
+scale = Vector2(4.5238094, 4.5238094)
+metadata/_edit_lock_ = true
+
+[node name="Pot2" parent="Objects" instance=ExtResource("13_7ua8r")]
+position = Vector2(4635, 433)
+scale = Vector2(4.5238094, 4.5238094)
+metadata/_edit_lock_ = true
+
+[node name="Pot22" parent="Objects" instance=ExtResource("14_r7sob")]
+position = Vector2(1761.9999, -1407)
+scale = Vector2(4.4519, 4.4519)
+metadata/_edit_lock_ = true
+
+[node name="Pot23" parent="Objects" instance=ExtResource("14_r7sob")]
+position = Vector2(-102.00001, 2601)
+scale = Vector2(4.5089417, 4.5089417)
+metadata/_edit_lock_ = true
+
+[node name="Pot31" parent="Objects" instance=ExtResource("15_y5y3l")]
+position = Vector2(2810, 418.99997)
+scale = Vector2(4.3263273, 4.3263273)
+metadata/_edit_lock_ = true
+
+[node name="Tree0" parent="Objects" instance=ExtResource("16_vjgi4")]
+position = Vector2(3176.0002, 840)
+scale = Vector2(4.538922, 4.538922)
+metadata/_edit_lock_ = true
+
+[node name="Tree1" parent="Objects" instance=ExtResource("16_vjgi4")]
+position = Vector2(4144, 1454)
+scale = Vector2(4.538922, 4.538922)
+metadata/_edit_lock_ = true
+
+[node name="Tree2" parent="Objects" instance=ExtResource("16_vjgi4")]
+position = Vector2(4796, 1230.0001)
+scale = Vector2(4.538922, 4.538922)
+metadata/_edit_lock_ = true
+
+[node name="Tree3" parent="Objects" instance=ExtResource("16_vjgi4")]
+position = Vector2(2912.0005, 2130)
+scale = Vector2(4.538922, 4.538922)
+metadata/_edit_lock_ = true
+
+[node name="Tree4" parent="Objects" instance=ExtResource("16_vjgi4")]
+position = Vector2(4184, 2520.0002)
+scale = Vector2(4.538922, 4.538922)
+metadata/_edit_lock_ = true
+
+[node name="Tree5" parent="Objects" instance=ExtResource("16_vjgi4")]
+position = Vector2(4184, 2520.0002)
+scale = Vector2(4.538922, 4.538922)
+metadata/_edit_lock_ = true
+
+[node name="Tree6" parent="Objects" instance=ExtResource("16_vjgi4")]
+position = Vector2(1576.0005, 2324)
+scale = Vector2(4.538922, 4.538922)
+metadata/_edit_lock_ = true
+
 [node name="BackgroundMap" type="TextureRect" parent="."]
 z_index = -4096
 offset_left = -3133.0
@@ -106,6 +218,27 @@ offset_top = -1755.0
 offset_right = 5236.1426
 offset_bottom = 3036.0
 texture = ExtResource("9_g4kob")
+metadata/_edit_lock_ = true
+
+[node name="MapBorder" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="TopWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(1047, -1665.5)
+shape = SubResource("RectangleShape2D_vjgi4")
+
+[node name="BottomWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(1047, 3006.25)
+shape = SubResource("RectangleShape2D_kyk2p")
+
+[node name="RightWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(5120, 700)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_45i86")
+
+[node name="LeftWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(-3110, 700)
+shape = SubResource("RectangleShape2D_sv1m6")
 
 [connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

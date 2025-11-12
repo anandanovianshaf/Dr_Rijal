@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7is37cmqh577"
-path="res://.godot/imported/map2.png-833ffbc857c20d656a7faa96765f52b6.ctex"
+uid="uid://baaypbcyghrm1"
+path="res://.godot/imported/placeholder-btn-arrow.png-797fb81b8ef99d43ecfd1d88db3118a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Background stage/Background stage/map2.png"
-dest_files=["res://.godot/imported/map2.png-833ffbc857c20d656a7faa96765f52b6.ctex"]
+source_file="res://assets/backgrounds/Background stage/placeholder-btn-arrow.png"
+dest_files=["res://.godot/imported/placeholder-btn-arrow.png-797fb81b8ef99d43ecfd1d88db3118a0.ctex"]
 
 [params]
 

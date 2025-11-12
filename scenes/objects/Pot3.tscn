@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://7bqtbsehrsad"]
+
+[ext_resource type="Texture2D" uid="uid://cyw8ea76j343q" path="res://assets/backgrounds/pot3.png" id="1_077w5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
+size = Vector2(126.500015, 35.500008)
+
+[node name="Pot3" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_077w5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.250003, 13)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_cptd4")

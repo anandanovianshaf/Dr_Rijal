@@ -1,26 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://d56n4y6f3h32"]
+[gd_scene load_steps=10 format=3 uid="uid://d56n4y6f3h32"]
 
-[ext_resource type="Script" uid="uid://mjfthbdxqudc" path="res://bullet.gd" id="1_4s4u5"]
-[ext_resource type="Texture2D" uid="uid://p0jnmiveh6k3" path="res://assets/peluru capsule/peluru capsule/vitamin-c-meledak.png" id="1_ayd6b"]
+[ext_resource type="Script" uid="uid://mjfthbdxqudc" path="res://scripts/bullet.gd" id="1_p1sfj"]
+[ext_resource type="Texture2D" uid="uid://p0jnmiveh6k3" path="res://assets/peluru capsule/peluru capsule/vitamin-c-meledak.png" id="2_4utqk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4s4u5"]
-atlas = ExtResource("1_ayd6b")
+atlas = ExtResource("2_4utqk")
 region = Rect2(420, 0, 420, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7281b"]
-atlas = ExtResource("1_ayd6b")
+atlas = ExtResource("2_4utqk")
 region = Rect2(0, 420, 420, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8st5"]
-atlas = ExtResource("1_ayd6b")
+atlas = ExtResource("2_4utqk")
 region = Rect2(420, 420, 420, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7awvy"]
-atlas = ExtResource("1_ayd6b")
+atlas = ExtResource("2_4utqk")
 region = Rect2(0, 0, 420, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rjr3"]
-atlas = ExtResource("1_ayd6b")
+atlas = ExtResource("2_4utqk")
 region = Rect2(420, 0, 420, 420)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3iaeh"]
@@ -51,13 +51,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4s4u5"]
+radius = 62.0
+height = 230.0
+
 [node name="Bullet" type="Area2D"]
-script = ExtResource("1_4s4u5")
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+script = ExtResource("1_p1sfj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3iaeh")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.99, 1.99)
+shape = SubResource("CapsuleShape2D_4s4u5")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_animation_finished"]

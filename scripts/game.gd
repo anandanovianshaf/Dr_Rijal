@@ -6,6 +6,7 @@ extends Node2D
 
 var is_game_over: bool = false
 
+
 func _ready():
 	# Listen to player health changes for lose condition
 	if player and player.has_signal("health_changed"):
@@ -17,6 +18,7 @@ func _ready():
 		camera.position_smoothing_enabled = true
 		camera.position_smoothing_speed = 8.0
 		camera.global_position = player.global_position
+
 
 func _on_player_health_changed(new_health: int) -> void:
 	if is_game_over:

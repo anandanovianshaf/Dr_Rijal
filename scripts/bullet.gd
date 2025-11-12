@@ -8,6 +8,11 @@ var target: Node2D = null
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var collision_shape = $CollisionShape2D
+@export var max_lifetime := 3.0
+
+func _ready():
+	await get_tree().create_timer(max_lifetime).timeout
+	queue_free()
 
 func _physics_process(delta):
 	# 1. Cek keamanan: Jika target sudah tidak ada (mati), hancurkan diri sendiri
@@ -28,18 +33,25 @@ func _physics_process(delta):
 
 # 1. Hubungkan Sinyal "body_entered" dari node 'Peluru' (Area2D)
 func _on_body_entered(body):
-	# 2. Cek apakah yang kita tabrak adalah target kita
-	if body == target:
-		# 3. JIKA YA: Meledak!
-		speed = 0 # Berhenti bergerak
-		collision_shape.disabled = true # Matikan tabrakan (agar tidak meledak 2x)
-		
-		# 4. Beri damage ke musuh
-		if body.has_method("take_damage"):
-			body.take_damage(100) # Damage Instakill
-			
-		# 5. Putar animasi ledakan
+	print("💥 Bullet hit: ", body.name)
+	if not is_instance_valid(body):
+		return
+
+	# Cek apakah ini virus
+	if body.is_in_group("virus"):
+		speed = 0
+		collision_shape.disabled = true
+
+		# Jalankan animasi ledakan
 		animated_sprite.play("explode")
+
+		# Beri damage ke virus
+		if body.has_method("take_damage"):
+			body.take_damage(100)
+	else:
+		print("⚠️ Peluru menabrak objek bukan virus: ", body.name)
+		
+
 
 # 2. Hubungkan Sinyal "animation_finished" dari node 'AnimatedSprite2D'
 func _on_animated_sprite_animation_finished():

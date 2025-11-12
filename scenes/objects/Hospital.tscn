@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq66nd0l0qicv"]
+
+[ext_resource type="Texture2D" uid="uid://tloc5lo1blou" path="res://assets/backgrounds/hospital.png" id="1_oxpjo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
+size = Vector2(660, 357)
+
+[node name="Hospital" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oxpjo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-25, 53.5)
+shape = SubResource("RectangleShape2D_cptd4")

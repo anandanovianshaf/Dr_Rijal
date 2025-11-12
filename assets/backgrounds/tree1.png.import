@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baaypbcyghrm1"
-path="res://.godot/imported/placeholder-btn-arrow.png-fa25c9702249983d875c6c63447809af.ctex"
+uid="uid://yn3guh0fpkvi"
+path="res://.godot/imported/tree1.png-20dabb2af1204def78692c18614c3525.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Background stage/Background stage/placeholder-btn-arrow.png"
-dest_files=["res://.godot/imported/placeholder-btn-arrow.png-fa25c9702249983d875c6c63447809af.ctex"]
+source_file="res://assets/backgrounds/tree1.png"
+dest_files=["res://.godot/imported/tree1.png-20dabb2af1204def78692c18614c3525.ctex"]
 
 [params]
 

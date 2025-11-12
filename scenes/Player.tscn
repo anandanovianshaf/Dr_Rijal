@@ -177,12 +177,12 @@ height = 248.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(-14, 242)
+scale = Vector2(1.5, 1.5)
 collision_layer = 2
 script = ExtResource("1_g2els")
 lock_on_scene = ExtResource("2_wqd30")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2, -133)
 sprite_frames = SubResource("SpriteFrames_rhr3r")
 animation = &"reload"
 autoplay = "idle"
@@ -190,7 +190,6 @@ frame = 6
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(11, -124)
 shape = SubResource("CapsuleShape2D_t53lx")
 debug_color = Color(0.9490196, 0, 0, 0.6117647)
 
@@ -198,7 +197,6 @@ debug_color = Color(0.9490196, 0, 0, 0.6117647)
 position = Vector2(3.26, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetFinder"]
-position = Vector2(10.999999, -145.99998)
 scale = Vector2(63.595, 63.595)
 shape = SubResource("CircleShape2D_vod78")
 
@@ -215,6 +213,6 @@ one_shot = true
 one_shot = true
 
 [node name="PistolPosition" type="Marker2D" parent="."]
-position = Vector2(17, -162)
+position = Vector2(1, -8)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

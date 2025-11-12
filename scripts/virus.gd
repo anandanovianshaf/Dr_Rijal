@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 75.0
+@export var speed: float = 150.0
 @export var health: int = 5
 @export var stopping_distance: float = 24.0
 @export var virus_scale: Vector2 = Vector2(0.6, 0.6)

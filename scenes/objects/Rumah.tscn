@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8h8bcrmb5obg"]
+
+[ext_resource type="Texture2D" uid="uid://c41x5cqxrnw0g" path="res://assets/backgrounds/batu.png" id="1_wimj7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
+size = Vector2(92, 25)
+
+[node name="Batu" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wimj7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 12.5)
+shape = SubResource("RectangleShape2D_cptd4")

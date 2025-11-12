@@ -46,7 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jilg7"]
-radius = 154.9
+radius = 246.7
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1c2qo"]
 radius = 669.0269
@@ -54,7 +54,7 @@ radius = 669.0269
 [node name="Virus" type="CharacterBody2D" groups=["virus"]]
 collision_mask = 2
 script = ExtResource("1_6tjwe")
-speed = 200.0
+speed = 300.0
 health = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -69,12 +69,11 @@ position = Vector2(-266, 263)
 shape = SubResource("CircleShape2D_jilg7")
 
 [node name="AttackRange" type="Area2D" parent="." groups=["virus"]]
-position = Vector2(-77.99999, 77.99999)
-scale = Vector2(0.5, 0.5)
+position = Vector2(-263, 253)
+scale = Vector2(0.47, 0.47)
 collision_mask = 2
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2(-376.00003, 370)
 shape = SubResource("CircleShape2D_1c2qo")
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # --- PROPERTI PLAYER ---
-@export var speed: float = 350.0
+@export var speed: float = 500.0
 var health: int = 3
 signal health_changed(new_health: int)
 
@@ -22,7 +22,7 @@ var arrow_textures = {
 }
 
 @export var lock_on_scene: PackedScene
-var peluru_scene = preload("res://Bullet.tscn")
+var peluru_scene = preload("res://scenes/Bullet.tscn")
 
 # --- NODE YANG DIPERLUKAN ---
 @onready var animated_sprite = $AnimatedSprite2D
@@ -161,6 +161,10 @@ func success_shot():
 	input_timer.stop()
 	shooting_ui.hide()
 	input_timer_display.visible = false
+	
+	print("REWARD: Kecepatan x1.5 selama 1 detik!")
+	speed = base_speed * 1.5 # Tingkatkan kecepatan
+	reward_timer.start() # Mulai timer 1 detik
 
 	if locked_target == null or not is_instance_valid(locked_target):
 		fail_shot() 
