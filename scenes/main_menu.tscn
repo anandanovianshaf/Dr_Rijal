@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3vjyyqgdc2xw"]
+
+[ext_resource type="Script" uid="uid://wpmurek6luvd" path="res://scripts/Menu/main_menu.gd" id="1_8ln24"]
+[ext_resource type="Texture2D" uid="uid://5tc4cnrqdax1" path="res://assets/Background stage/Menu Assets/menubackground.jpg" id="2_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://drgwfc6sep2ot" path="res://assets/button/btn_start.png" id="3_oa1go"]
+[ext_resource type="Texture2D" uid="uid://dfoglpeu1fbyl" path="res://assets/button/btn-credit.png" id="4_tbmy8"]
+[ext_resource type="AudioStream" uid="uid://bdab3mlc6g5yy" path="res://assets/Background stage/Menu Assets/Audio/intheloopmod.mp3" id="5_jk1qb"]
+
+[sub_resource type="FontFile" id="FontFile_oheeu"]
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/150/0/ascent = 0.0
+cache/0/150/0/descent = 0.0
+cache/0/150/0/underline_position = 0.0
+cache/0/150/0/underline_thickness = 0.0
+cache/0/150/0/scale = 1.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ln24")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rtw2f")
+
+[node name="MenuContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -19.0
+offset_right = 1920.0
+offset_bottom = 547.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+alignment = 2
+
+[node name="PlayButton" type="TextureButton" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_oa1go")
+stretch_mode = 3
+
+[node name="CreditButton" type="TextureButton" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_tbmy8")
+stretch_mode = 3
+
+[node name="QuitButton" type="TextureButton" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 6.0
+offset_bottom = 305.0
+grow_horizontal = 2
+theme_override_fonts/font = SubResource("FontFile_oheeu")
+theme_override_font_sizes/font_size = 150
+text = "DR.Rijal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_jk1qb")
+autoplay = true

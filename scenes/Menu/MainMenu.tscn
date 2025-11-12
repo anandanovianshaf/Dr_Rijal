@@ -11,24 +11,6 @@
 [ext_resource type="AudioStream" uid="uid://d00jcqhcdspfk" path="res://assets/Audio/sfx_audio/Hover.wav" id="9_scfwc"]
 [ext_resource type="AudioStream" uid="uid://bus8mxh7jo1of" path="res://assets/Audio/sfx_audio/Up2.wav" id="10_4xcma"]
 
-[sub_resource type="Animation" id="Animation_0n5pj"]
-resource_name = "hover_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FadeRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.0022),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_i0awj"]
-resource_name = "hover_out"
-
 [sub_resource type="Animation" id="Animation_3m84m"]
 length = 0.001
 tracks/0/type = "value"
@@ -49,6 +31,24 @@ resource_name = "fade_in"
 
 [sub_resource type="Animation" id="Animation_4xcma"]
 resource_name = "fade_out"
+
+[sub_resource type="Animation" id="Animation_0n5pj"]
+resource_name = "hover_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0022),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i0awj"]
+resource_name = "hover_out"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_scfwc"]
 _data = {
@@ -148,7 +148,7 @@ libraries = {
 
 [node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_scfwc")
-volume_db = -6.0
+volume_db = 3.0
 autoplay = true
 
 [node name="SFXHover" type="AudioStreamPlayer" parent="."]

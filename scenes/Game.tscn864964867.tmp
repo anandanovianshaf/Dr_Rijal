@@ -1,4 +1,4 @@
-    [gd_scene load_steps=26 format=3 uid="uid://2a4txohmhno6"]
+[gd_scene load_steps=25 format=3 uid="uid://2a4txohmhno6"]
 
 [ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
 [ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
@@ -35,8 +35,6 @@ size = Vector2(58, 4496)
 
 [node name="Game" type="Node2D" groups=["player", "virus"]]
 script = ExtResource("4_gw6i8")
-
-[node name="PauseMenu" parent="." instance=ExtResource("18_kyk2p")]
 
 [node name="Player" parent="." instance=ExtResource("1_qbsmt")]
 z_index = 10
@@ -135,10 +133,10 @@ scale = Vector2(0.35, 0.35)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 836.0
-offset_top = -1029.0
-offset_right = 1077.791
-offset_bottom = -948.0
+offset_left = 50.0
+offset_top = -100.0
+offset_right = 250.0
+offset_bottom = -50.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "01:00"
