@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://77cdepp1xcu2"]
+[gd_scene load_steps=23 format=3 uid="uid://77cdepp1xcu2"]
 
 [ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
 [ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://64opa8qso355" path="res://scenes/objects/Pot2.tscn" id="14_r7sob"]
 [ext_resource type="PackedScene" uid="uid://7bqtbsehrsad" path="res://scenes/objects/Pot3.tscn" id="15_y5y3l"]
 [ext_resource type="PackedScene" uid="uid://cfy2xmqwm5vq" path="res://scenes/objects/Tree.tscn" id="16_vjgi4"]
+[ext_resource type="PackedScene" uid="uid://idxo3wybxemr" path="res://scenes/Menu/PauseMenu.tscn" id="18_kyk2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjgi4"]
 size = Vector2(8360, 171)
@@ -239,6 +240,12 @@ shape = SubResource("RectangleShape2D_45i86")
 [node name="LeftWall" type="CollisionShape2D" parent="MapBorder"]
 position = Vector2(-3110, 700)
 shape = SubResource("RectangleShape2D_sv1m6")
+
+[node name="PauseMenu" parent="." instance=ExtResource("18_kyk2p")]
+offset_left = 378.687
+offset_top = -54.211975
+offset_right = 378.687
+offset_bottom = -54.211975
 
 [connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

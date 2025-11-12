@@ -1,33 +1,67 @@
 extends Control
 
-@onready var play_button = $MenuContainer/VBoxContainer/PlayButton
-@onready var credits_button = $MenuContainer/VBoxContainer/CreditButton
-@onready var quit_button = $MenuContainer/VBoxContainer/QuitButton
-@onready var parallax_bg = $ParallaxBackground
-@onready var bgm_player = $BGMPlayer
+@onready var start_button: TextureButton = $VBoxContainer/StartButton
+@onready var credit_button: TextureButton = $VBoxContainer/CreditButton
+@onready var quit_button: TextureButton = $VBoxContainer/QuitButton
+@onready var title_label: Label = $Title
+@onready var fade_rect: ColorRect = $FadeRect
+@onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var sfx_hover: AudioStreamPlayer = $SFX_Hover
+@onready var sfx_click: AudioStreamPlayer = $SFX_Click
 
 func _ready():
-	# Connect button signals
-	play_button.pressed.connect(_on_play_pressed)
-	credits_button.pressed.connect(_on_credits_pressed)
+	# Awal kondisi fade
+	fade_rect.modulate.a = 1.0
+	anim.play("fade_in")
+
+	# Connect tombol
+	start_button.pressed.connect(_on_start_pressed)
+	credit_button.pressed.connect(_on_credit_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 
-	# Play BGM if not already playing
-	if not bgm_player.playing:
-		bgm_player.play()
+	# Hover efek suara dan skala
+	for btn in [start_button, credit_button, quit_button]:
+		btn.mouse_entered.connect(func(): _on_button_hovered(btn))
+		btn.mouse_exited.connect(func(): _on_button_exited(btn))
 
-func _on_play_pressed():
-	print("Play pressed!")
-	get_tree().change_scene_to_file("res://scenes/MainMenu/prologue.tscn")
+	# Intro animasi menu
+	title_label.modulate.a = 0
+	for btn in [start_button, credit_button, quit_button]:
+		btn.modulate.a = 0
+	anim.play("menu_intro")
 
-func _on_credits_pressed():
-	print("Credits pressed!")
-	get_tree().change_scene_to_file("res://scenes/MainMenu/credits.tscn")
+
+func _on_start_pressed():
+	_play_click_sfx()
+	anim.play("fade_out")
+	await anim.animation_finished
+	get_tree().change_scene_to_file("res://scenes/Menu/prologue.tscn")
+
+
+func _on_credit_pressed():
+	_play_click_sfx()
+	anim.play("fade_out")
+	await anim.animation_finished
+	get_tree().change_scene_to_file("res://scenes/Menu/credits.tscn")
+
 
 func _on_quit_pressed():
-	print("Quit pressed!")
+	_play_click_sfx()
 	get_tree().quit()
 
-func _process(delta):
-	if parallax_bg:
-		parallax_bg.scroll_offset.x += 20 * delta
+
+func _on_button_hovered(btn: TextureButton):
+	if sfx_hover:
+		sfx_hover.play()
+	var tween = create_tween()
+	tween.tween_property(btn, "scale", Vector2(1.1, 1.1), 0.15).set_trans(Tween.TRANS_SINE)
+
+
+func _on_button_exited(btn: TextureButton):
+	var tween = create_tween()
+	tween.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.15).set_trans(Tween.TRANS_SINE)
+
+
+func _play_click_sfx():
+	if sfx_click:
+		sfx_click.play()
