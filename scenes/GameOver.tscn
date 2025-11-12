@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://qth27aojuf52"]
+[gd_scene load_steps=3 format=3 uid="uid://dhuwqxxvv4xdc"]
 
 [ext_resource type="Script" uid="uid://02lfxsac2knv" path="res://scripts/game_over.gd" id="1_b0k2p"]
 [ext_resource type="Texture2D" uid="uid://erxw58fpqdk4" path="res://assets/backgrounds/Background stage/gameover_bg.jpg" id="2_qae0b"]
@@ -17,10 +17,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 17.0
-offset_right = 11.0
-offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qae0b")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bfdpjp60k1mpf"]
 
-[ext_resource type="Script" path="res://scripts/stage_clear.gd" id="1_q2u3y"]
+[ext_resource type="Script" uid="uid://d8tta8hhxfbs" path="res://scripts/stage_clear.gd" id="1_q2u3y"]
+[ext_resource type="Texture2D" uid="uid://erxw58fpqdk4" path="res://assets/backgrounds/Background stage/gameover_bg.jpg" id="2_lnf8y"]
 
 [node name="StageClear" type="Control"]
 layout_mode = 3
@@ -11,9 +12,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q2u3y")
 
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lnf8y")
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.25
 anchor_top = 0.25
 anchor_right = 0.75
@@ -23,15 +33,15 @@ grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 theme_override_constants/separation = 24
+alignment = 1
 
 [node name="Label" type="Label" parent="Panel/VBox"]
 layout_mode = 2
@@ -44,5 +54,3 @@ layout_mode = 2
 text = "Lanjut ke Stage 2"
 
 [connection signal="pressed" from="Panel/VBox/ProceedButton" to="." method="_on_proceed_pressed"]
-
-

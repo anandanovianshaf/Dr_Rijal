@@ -4,6 +4,7 @@ extends Node2D
 @onready var global_timer: Timer = $GlobalTimer
 @onready var camera: Camera2D = $Camera2D
 @onready var game_over: Control = $GameOver
+@onready var pause_menu = $PauseMenu
 
 var is_game_over: bool = false
 
@@ -67,3 +68,10 @@ func _go_to_game_over():
 func _process(_delta: float) -> void:
 	if camera and player:
 		camera.global_position = player.global_position
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"): # default tombol Esc
+		if get_tree().paused:
+			pause_menu.hide_pause_menu()
+		else:
+			pause_menu.show_pause_menu()
