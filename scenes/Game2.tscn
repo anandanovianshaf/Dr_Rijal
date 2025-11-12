@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cjsrgdeifqwvp"]
+[gd_scene load_steps=25 format=3 uid="uid://cjsrgdeifqwvp"]
 
 [ext_resource type="Script" uid="uid://dfdnauc243as4" path="res://scripts/game2.gd" id="1_lnh4t"]
 [ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="2_rjeic"]
@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://bbjqh8sipu8yy" path="res://scenes/objects/Pool.tscn" id="16_ffleq"]
 [ext_resource type="Texture2D" uid="uid://7is37cmqh577" path="res://assets/backgrounds/Background stage/map2.png" id="17_dlast"]
 [ext_resource type="AudioStream" uid="uid://bpkqlt128hr7a" path="res://assets/Audio/intheloopmod.mp3" id="18_bs42u"]
+[ext_resource type="PackedScene" uid="uid://c04tadjjxaajd" path="res://addons/stopwatch/Stopwatch.tscn" id="19_mn1ld"]
+[ext_resource type="PackedScene" uid="uid://dhuwqxxvv4xdc" path="res://scenes/GameOver.tscn" id="20_fxmsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjgi4"]
 size = Vector2(8360, 41)
@@ -306,6 +308,10 @@ stream = ExtResource("18_bs42u")
 volume_db = -4.039
 autoplay = true
 max_distance = 4096.0
+
+[node name="Stopwatch" parent="." instance=ExtResource("19_mn1ld")]
+
+[node name="GameOver" parent="." instance=ExtResource("20_fxmsd")]
 
 [connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]
