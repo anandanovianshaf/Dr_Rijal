@@ -1,0 +1,45 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://y1xil0is1v5b"]
+
+[ext_resource type="Texture2D" uid="uid://dlviidyahydrc" path="res://assets/Monster/influenza-prajurit-mati.png" id="1_wab8y"]
+[ext_resource type="Texture2D" uid="uid://ks5jhtfxgvuc" path="res://assets/Monster/influenza-prajurit.png" id="2_0kqis"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7g53"]
+atlas = ExtResource("1_wab8y")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj7ge"]
+atlas = ExtResource("1_wab8y")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmijv"]
+atlas = ExtResource("1_wab8y")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj3yn"]
+atlas = ExtResource("2_0kqis")
+region = Rect2(0, 0, 1024, 1024)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7g53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj7ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmijv")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj3yn")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]

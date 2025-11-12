@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bwjjthnc6kuhs"]
+
+[ext_resource type="Texture2D" uid="uid://p0jnmiveh6k3" path="res://assets/peluru capsule/peluru capsule/vitamin-c-meledak.png" id="1_sss3m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s4u5"]
+atlas = ExtResource("1_sss3m")
+region = Rect2(420, 0, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7281b"]
+atlas = ExtResource("1_sss3m")
+region = Rect2(0, 420, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8st5"]
+atlas = ExtResource("1_sss3m")
+region = Rect2(420, 420, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7awvy"]
+atlas = ExtResource("1_sss3m")
+region = Rect2(0, 0, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rjr3"]
+atlas = ExtResource("1_sss3m")
+region = Rect2(420, 0, 420, 420)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s4u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7281b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8st5")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7awvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rjr3")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]

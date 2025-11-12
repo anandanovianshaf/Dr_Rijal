@@ -1,0 +1,310 @@
+[gd_scene load_steps=26 format=3 uid="uid://5p6splo5a658"]
+
+[ext_resource type="Script" uid="uid://dfdnauc243as4" path="res://scripts/Stage2.gd" id="1_nqogs"]
+[ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="2_b5rwe"]
+[ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="3_s67mi"]
+[ext_resource type="Script" uid="uid://eqw6dr31eft7" path="res://scripts/enemy_spawner.gd" id="4_ktig7"]
+[ext_resource type="Texture2D" uid="uid://jrtnpxrrw4s2" path="res://assets/backgrounds/Background stage/border-camera.png" id="5_j60rq"]
+[ext_resource type="Texture2D" uid="uid://baaypbcyghrm1" path="res://assets/backgrounds/Background stage/placeholder-btn-arrow.png" id="6_v6fi8"]
+[ext_resource type="PackedScene" uid="uid://wq5m7o6hlvd7" path="res://scenes/ShootingUI.tscn" id="7_0dy3l"]
+[ext_resource type="PackedScene" uid="uid://fl63ylkoh1go" path="res://scenes/NumberDisplay.tscn" id="8_hvyut"]
+[ext_resource type="PackedScene" uid="uid://c7l442e0awhgb" path="res://scenes/HUD.tscn" id="9_hljw5"]
+[ext_resource type="PackedScene" uid="uid://jt6daak2futb" path="res://scenes/Potion.tscn" id="10_q8ddb"]
+[ext_resource type="PackedScene" uid="uid://c5bhbdfololqi" path="res://scenes/objects/House.tscn" id="11_l3pt3"]
+[ext_resource type="Texture2D" uid="uid://404q3131kha3" path="res://assets/backgrounds/Background Map 3/map3rev1.png" id="11_mo5pk"]
+[ext_resource type="PackedScene" uid="uid://bcehp4e27goiw" path="res://scenes/objects/Seng.tscn" id="12_mmlqn"]
+[ext_resource type="PackedScene" uid="uid://bfrcd4kprknsx" path="res://scenes/objects/Ban.tscn" id="13_6g0f0"]
+[ext_resource type="PackedScene" uid="uid://cphvc5o6wslv" path="res://scenes/objects/Tong_Kuning.tscn" id="14_nqogs"]
+[ext_resource type="PackedScene" uid="uid://djlxmroe42y01" path="res://scenes/objects/Tong_Coklat.tscn" id="15_b5rwe"]
+[ext_resource type="PackedScene" uid="uid://cwowtcufp11cy" path="res://scenes/objects/Skull.tscn" id="16_nqogs"]
+[ext_resource type="PackedScene" uid="uid://pq01xypvtmde" path="res://scenes/objects/Tower.tscn" id="17_b5rwe"]
+[ext_resource type="PackedScene" uid="uid://s0nb0ecuo04o" path="res://scenes/objects/Tong_Sampah.tscn" id="18_ktig7"]
+[ext_resource type="AudioStream" uid="uid://bpkqlt128hr7a" path="res://assets/Audio/intheloopmod.mp3" id="18_w0spg"]
+[ext_resource type="PackedScene" uid="uid://dos0a0o271bwn" path="res://scenes/objects/Tree_Wild.tscn" id="19_j60rq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjgi4"]
+size = Vector2(8360, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyk2p"]
+size = Vector2(8358, 86.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45i86"]
+size = Vector2(4629, 44.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv1m6"]
+size = Vector2(35, 4651)
+
+[node name="Stage3" type="Node2D" groups=["player", "virus"]]
+script = ExtResource("1_nqogs")
+
+[node name="Player" parent="." instance=ExtResource("2_b5rwe")]
+z_index = 10
+position = Vector2(955, 586)
+
+[node name="Camera2D" type="Camera2D" parent="Player" groups=["camera"]]
+zoom = Vector2(0.5, 0.5)
+limit_left = -3110
+limit_top = -1665
+limit_right = 5120
+limit_bottom = 3006
+
+[node name="Virus" parent="." instance=ExtResource("3_s67mi")]
+position = Vector2(-1316, 682)
+speed = 250.0
+stopping_distance = 10.0
+
+[node name="GlobalTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("4_ktig7")
+enemy_scene = ExtResource("3_s67mi")
+spawn_interval = 2.5
+max_enemies_alive = 50
+
+[node name="BorderLayer" type="CanvasLayer" parent="." groups=["camera"]]
+
+[node name="BorderImage" type="TextureRect" parent="BorderLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -1099.0
+offset_right = -330.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.0003674495
+scale = Vector2(3.4, 3)
+texture = ExtResource("5_j60rq")
+stretch_mode = 2
+
+[node name="ArrowUILayer" type="CanvasLayer" parent="BorderLayer"]
+
+[node name="Placeholder" type="TextureRect" parent="BorderLayer/ArrowUILayer"]
+z_index = 5
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -893.0
+offset_top = -428.0
+offset_right = 76.84009
+offset_bottom = 220.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_v6fi8")
+
+[node name="ShootingUI" parent="BorderLayer/ArrowUILayer/Placeholder" groups=["shooting_ui"] instance=ExtResource("7_0dy3l")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.92004
+offset_top = -54.0
+offset_right = 105.079956
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+
+[node name="InpuTimerDisplay" parent="BorderLayer/ArrowUILayer/Placeholder" groups=["input_timer_display"] instance=ExtResource("8_hvyut")]
+visible = false
+layout_mode = 0
+offset_left = 142.0
+offset_top = 160.0
+offset_right = 214.0
+offset_bottom = 288.0
+scale = Vector2(0.7203008, 0.7203008)
+
+[node name="HUD" parent="BorderLayer" instance=ExtResource("9_hljw5")]
+offset_left = 50.999996
+offset_top = 117.0
+offset_right = 91.0
+offset_bottom = 157.0
+scale = Vector2(0.35, 0.35)
+
+[node name="TimerDisplay" type="Label" parent="BorderLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 836.0
+offset_top = -1029.0
+offset_right = 1077.791
+offset_bottom = -948.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "01:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Potion1" parent="Objects" instance=ExtResource("10_q8ddb")]
+position = Vector2(-2165, -168)
+scale = Vector2(4.7, 4.7)
+
+[node name="Potion2" parent="Objects" instance=ExtResource("10_q8ddb")]
+position = Vector2(2704.9998, -610)
+scale = Vector2(4.7, 4.7)
+
+[node name="Potion3" parent="Objects" instance=ExtResource("10_q8ddb")]
+position = Vector2(4213, 2554)
+scale = Vector2(4.7, 4.7)
+
+[node name="Potion4" parent="Objects" instance=ExtResource("10_q8ddb")]
+position = Vector2(-400.99988, 1548)
+scale = Vector2(4.7, 4.7)
+
+[node name="House" parent="Objects" instance=ExtResource("11_l3pt3")]
+position = Vector2(-1296, -650)
+scale = Vector2(5.1271977, 5.1271977)
+
+[node name="Seng" parent="Objects" instance=ExtResource("12_mmlqn")]
+position = Vector2(-906, -228)
+scale = Vector2(4.216512, 4.216512)
+
+[node name="Ban1" parent="Objects" instance=ExtResource("13_6g0f0")]
+position = Vector2(-1823, -330)
+scale = Vector2(5.034672, 5.034672)
+
+[node name="Ban2" parent="Objects" instance=ExtResource("13_6g0f0")]
+position = Vector2(3568.0002, 202.00002)
+scale = Vector2(5.034672, 5.034672)
+
+[node name="Tong1" parent="Objects" instance=ExtResource("14_nqogs")]
+position = Vector2(605, 1731.0001)
+scale = Vector2(4.474313, 4.474313)
+
+[node name="Tong2" parent="Objects" instance=ExtResource("14_nqogs")]
+position = Vector2(-3038.0002, 190)
+scale = Vector2(4.474313, 4.474313)
+
+[node name="Tongli1" parent="Objects" instance=ExtResource("15_b5rwe")]
+position = Vector2(-514, 668)
+scale = Vector2(5.9732485, 5.9732485)
+
+[node name="Tongli2" parent="Objects" instance=ExtResource("15_b5rwe")]
+position = Vector2(-345.00003, -1527)
+scale = Vector2(5.9732485, 5.9732485)
+
+[node name="Tongli3" parent="Objects" instance=ExtResource("15_b5rwe")]
+position = Vector2(5040.0005, 227.00003)
+scale = Vector2(5.9732485, 5.9732485)
+
+[node name="Tongli4" parent="Objects" instance=ExtResource("15_b5rwe")]
+position = Vector2(-2591, 2833.0002)
+scale = Vector2(5.9732485, 5.9732485)
+
+[node name="Skull1" parent="Objects" instance=ExtResource("16_nqogs")]
+position = Vector2(2138, -866)
+scale = Vector2(4.6074095, 4.6074095)
+
+[node name="Skull2" parent="Objects" instance=ExtResource("16_nqogs")]
+position = Vector2(1438, 2421.9998)
+scale = Vector2(4.6074095, 4.6074095)
+
+[node name="Skull3" parent="Objects" instance=ExtResource("16_nqogs")]
+position = Vector2(-2990.9998, 1296)
+scale = Vector2(4.6074095, 4.6074095)
+
+[node name="Skull4" parent="Objects" instance=ExtResource("16_nqogs")]
+position = Vector2(-2175, -716)
+scale = Vector2(4.6074095, 4.6074095)
+
+[node name="Tower1" parent="Objects" instance=ExtResource("17_b5rwe")]
+position = Vector2(4415.9995, -835.99994)
+scale = Vector2(2.8328352, 2.8328352)
+
+[node name="Tower2" parent="Objects" instance=ExtResource("17_b5rwe")]
+position = Vector2(-1874.9999, 2363)
+scale = Vector2(2.8328352, 2.8328352)
+
+[node name="Tongsah" parent="Objects" instance=ExtResource("18_ktig7")]
+position = Vector2(-1302, 1787.9999)
+scale = Vector2(4.171717, 4.171717)
+
+[node name="Tree1" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(-2713.0002, -1448.0001)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree2" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(443.99988, -1250)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree3" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(1374, -572)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree4" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(2727, -1187)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree5" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(4389, 907)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree6" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(2859.0005, 562.00006)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree7" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(2763, 2356)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree8" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(-117, 2167)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree9" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(-2028, 802)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="Tree10" parent="Objects" instance=ExtResource("19_j60rq")]
+position = Vector2(1198, 967.00006)
+scale = Vector2(4.357143, 4.357143)
+
+[node name="BackgroundMap" type="TextureRect" parent="."]
+z_index = -4096
+offset_left = -3133.0
+offset_top = -1755.0
+offset_right = 5236.1426
+offset_bottom = 3036.0
+texture = ExtResource("11_mo5pk")
+metadata/_edit_lock_ = true
+
+[node name="MapBorder" type="StaticBody2D" parent="."]
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="TopWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(1047, -1730.5)
+shape = SubResource("RectangleShape2D_vjgi4")
+
+[node name="BottomWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(1047, 3006.25)
+shape = SubResource("RectangleShape2D_kyk2p")
+
+[node name="RightWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(5201.375, 619.5)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_45i86")
+
+[node name="LeftWall" type="CollisionShape2D" parent="MapBorder"]
+position = Vector2(-3127.5, 622.5)
+shape = SubResource("RectangleShape2D_sv1m6")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_w0spg")
+volume_db = -4.039
+autoplay = true
+max_distance = 4096.0
+
+[connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
+[connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

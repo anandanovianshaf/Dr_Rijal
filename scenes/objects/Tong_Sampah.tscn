@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://s0nb0ecuo04o"]
+
+[ext_resource type="Texture2D" uid="uid://p64dmounp2is" path="res://assets/backgrounds/Background Map 3/tong_sampah.png" id="1_087ms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
+size = Vector2(37.312504, 37.910316)
+
+[node name="Tongsah" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_087ms")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.6562505, 8.044846)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_cptd4")

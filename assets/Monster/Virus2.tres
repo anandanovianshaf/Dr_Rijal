@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://b5t181xskv848"]
+
+[ext_resource type="Texture2D" uid="uid://cy8wqn15bb2sk" path="res://assets/Monster/dbd-prajurit-mati.png" id="1_e8v16"]
+[ext_resource type="Texture2D" uid="uid://copbh8txg4gkn" path="res://assets/Monster/dbd-prajurit.png" id="2_3v0fe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8v16"]
+atlas = ExtResource("1_e8v16")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v0fe"]
+atlas = ExtResource("2_3v0fe")
+region = Rect2(0, 0, 1024, 1024)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8v16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8v16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8v16")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v0fe")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]

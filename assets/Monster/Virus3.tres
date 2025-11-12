@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://b01xntaf0gtov"]
+
+[ext_resource type="Texture2D" uid="uid://5avohwmafwjk" path="res://assets/Monster/corona-prajurit-mati.png" id="1_vj0vo"]
+[ext_resource type="Texture2D" uid="uid://cokei3pl8541e" path="res://assets/Monster/corona-prajurit.png" id="2_1w2x6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p5ao"]
+atlas = ExtResource("1_vj0vo")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v20a6"]
+atlas = ExtResource("2_1w2x6")
+region = Rect2(0, 0, 1024, 1024)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p5ao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p5ao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p5ao")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v20a6")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
