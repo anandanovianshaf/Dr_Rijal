@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://2a4txohmhno6"]
+[gd_scene load_steps=25 format=3 uid="uid://2a4txohmhno6"]
 
 [ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
 [ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cfy2xmqwm5vq" path="res://scenes/objects/Tree.tscn" id="16_vjgi4"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Pole.tscn" id="17_kyk2p"]
 [ext_resource type="PackedScene" path="res://scenes/Potion.tscn" id="19_45i86"]
+[ext_resource type="AudioStream" uid="uid://bpkqlt128hr7a" path="res://assets/Audio/intheloopmod.mp3" id="20_sv1m6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjgi4"]
 size = Vector2(8360, 171)
@@ -272,6 +273,12 @@ shape = SubResource("RectangleShape2D_45i86")
 [node name="LeftWall" type="CollisionShape2D" parent="MapBorder"]
 position = Vector2(-3110, 700)
 shape = SubResource("RectangleShape2D_sv1m6")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_sv1m6")
+volume_db = -4.039
+autoplay = true
+max_distance = 4096.0
 
 [connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]
