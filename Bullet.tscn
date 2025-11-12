@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://d56n4y6f3h32"]
+
+[ext_resource type="Script" uid="uid://mjfthbdxqudc" path="res://bullet.gd" id="1_4s4u5"]
+[ext_resource type="Texture2D" uid="uid://p0jnmiveh6k3" path="res://assets/peluru capsule/peluru capsule/vitamin-c-meledak.png" id="1_ayd6b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s4u5"]
+atlas = ExtResource("1_ayd6b")
+region = Rect2(420, 0, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7281b"]
+atlas = ExtResource("1_ayd6b")
+region = Rect2(0, 420, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8st5"]
+atlas = ExtResource("1_ayd6b")
+region = Rect2(420, 420, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7awvy"]
+atlas = ExtResource("1_ayd6b")
+region = Rect2(0, 0, 420, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rjr3"]
+atlas = ExtResource("1_ayd6b")
+region = Rect2(420, 0, 420, 420)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3iaeh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s4u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7281b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8st5")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7awvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rjr3")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_4s4u5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3iaeh")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_animation_finished"]

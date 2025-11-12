@@ -60,18 +60,34 @@ func _is_player_valid() -> bool:
 
 # --- Fungsi damage & kematian ---
 func take_damage(amount):
+	# Kita cek dulu apakah health masih ada
+	# (agar tidak memanggil die() berkali-kali)
+	if health <= 0:
+		return
+
 	health -= amount
 	print("Virus HP: ", health)
+	
 	if health <= 0:
 		die()
 
 func die():
+	# 1. Hentikan semua logika AI
 	set_physics_process(false)
 	velocity = Vector2.ZERO
+	
+	# 2. Matikan semua tabrakan
 	$CollisionShape2D.disabled = true
 	$AttackRange.monitoring = false
+	
+	# 3. Putar animasi mati
+	# (Pastikan Anda punya animasi "dead" di Virus.tscn)
 	animated_sprite.play("dead")
+	
+	# 4. Tunggu 1 detik (agar animasi sempat main)
 	await get_tree().create_timer(1.0).timeout
+	
+	# 5. Hapus virus
 	queue_free()
 
 

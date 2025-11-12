@@ -184,14 +184,15 @@ lock_on_scene = ExtResource("2_wqd30")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -133)
 sprite_frames = SubResource("SpriteFrames_rhr3r")
-animation = &"walk"
+animation = &"reload"
 autoplay = "idle"
-frame_progress = 0.6753092
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(11, -124)
 shape = SubResource("CapsuleShape2D_t53lx")
-debug_color = Color(0.9490196, 0, 0, 0.85882354)
+debug_color = Color(0.9490196, 0, 0, 0.6117647)
 
 [node name="TargetFinder" type="Area2D" parent="." groups=["player"]]
 position = Vector2(3.26, 0)
@@ -212,5 +213,8 @@ one_shot = true
 
 [node name="RewardTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PistolPosition" type="Marker2D" parent="."]
+position = Vector2(17, -162)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

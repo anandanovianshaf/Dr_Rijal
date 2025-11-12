@@ -22,6 +22,7 @@ var arrow_textures = {
 }
 
 @export var lock_on_scene: PackedScene
+var peluru_scene = preload("res://Bullet.tscn")
 
 # --- NODE YANG DIPERLUKAN ---
 @onready var animated_sprite = $AnimatedSprite2D
@@ -160,26 +161,28 @@ func success_shot():
 	input_timer.stop()
 	shooting_ui.hide()
 	input_timer_display.visible = false
-	
-	# --- LOGIKA REWARD ---
-	print("REWARD: Kecepatan x1.5 selama 1 detik!")
-	speed = base_speed * 1.5 # Tingkatkan kecepatan
-	reward_timer.start() # Mulai timer 1 detik
-	# --- AKHIR REWARD ---
-	
+
 	if locked_target == null or not is_instance_valid(locked_target):
 		fail_shot() 
 		return
-		
+
 	print("BERHASIL! Menembak ", locked_target.name)
-	
-	if locked_target.global_position.x < global_position.x:
-		animated_sprite.flip_h = true 
+	# --- TAMBAHKAN LOGIKA MENEMBAK BARU INI ---
+	# 1. Buat instance (salinan) peluru
+	var new_bullet = peluru_scene.instantiate()
+
+	# 2. Beri tahu peluru siapa targetnya
+	new_bullet.target = locked_target
+
+	# 3. Atur posisi awal peluru
+	# (Gunakan $PistolPosition jika Anda buat, jika tidak, gunakan global_position)
+	if has_node("PistolPosition"):
+		new_bullet.global_position = $PistolPosition.global_position
 	else:
-		animated_sprite.flip_h = false
-		
-	if locked_target.has_method("take_damage"):
-		locked_target.take_damage(100)
+		new_bullet.global_position = global_position # Spawn di tengah player
+
+	# 4. Tambahkan peluru ke dunia game (bukan ke player)
+	get_parent().add_child(new_bullet)
 
 # --- FUNGSI fail_shot YANG DIPERBARUI ---
 func fail_shot():
