@@ -1,15 +1,15 @@
 extends Control
 
-@onready var play_button: TextureButton = $MenuContainer/PlayButton
-@onready var tutorial_button: TextureButton = $MenuContainer/TutorialButton
-@onready var credit_button: TextureButton = $MenuContainer/CreditButton
-@onready var quit_button: TextureButton = $MenuContainer/QuitButton
+@onready var play_button: TextureButton = $MenuContainer/VBoxContainer/PlayButton
+@onready var tutorial_button: TextureButton = $MenuContainer/VBoxContainer/TutorialButton
+@onready var credit_button: TextureButton = $MenuContainer/VBoxContainer/CreditButton
+@onready var quit_button: TextureButton = $MenuContainer/VBoxContainer/QuitButton
 
-@onready var sfx_hover: AudioStreamPlayer = $AudioHover
-@onready var sfx_click: AudioStreamPlayer = $AudioClick
+@onready var sfx_hover: AudioStreamPlayer = $AudioStreamPlayer # Ganti nama node ke "AudioStreamPlayer"
+@onready var sfx_click: AudioStreamPlayer = $AudioStreamPlayer # Kalau mau pisah hover & click, duplikasi node ini
 
 func _ready():
-	# kumpulkan semua tombol biar gak connect satu-satu manual
+	# kumpulkan semua tombol biar efisien
 	var buttons = [
 		play_button,
 		tutorial_button,
@@ -28,13 +28,16 @@ func _on_button_hovered():
 func _on_button_pressed(button: TextureButton):
 	if sfx_click:
 		sfx_click.play()
-	
+
+	# beri delay sedikit supaya SFX sempat terdengar sebelum pindah scene
+	await get_tree().create_timer(0.2).timeout
+
 	match button.name:
 		"PlayButton":
-			get_tree().change_scene_to_file("res://scenes/Prologue.tscn")
+			get_tree().change_scene_to_file("res://scenes/Menu/prologue.tscn")
 		"TutorialButton":
-			get_tree().change_scene_to_file("res://scenes/Tutorial.tscn")
+			get_tree().change_scene_to_file("res://scenes/Menu/tutorial.tscn")
 		"CreditButton":
-			get_tree().change_scene_to_file("res://scenes/MainMenu/credits.tscn")
+			get_tree().change_scene_to_file("res://scenes/Menu/credits.tscn")
 		"QuitButton":
 			get_tree().quit()

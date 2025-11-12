@@ -217,15 +217,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_qgfdq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jkihx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qgfdq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qgfdq")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_cyakk")
 }],
 "loop": false,
@@ -282,7 +273,7 @@ lock_on_scene = ExtResource("2_wqd30")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
 sprite_frames = SubResource("SpriteFrames_rhr3r")
-animation = &"idle"
+animation = &"reload"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
