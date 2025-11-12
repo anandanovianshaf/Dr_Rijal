@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://idxo3wybxemr"]
+
+[ext_resource type="Script" uid="uid://mlsqw6s5vg5y" path="res://scripts/Menu/pause_menu.gd" id="1_dc3ep"]
+[ext_resource type="Texture2D" uid="uid://c13tgujk3ri0c" path="res://assets/button/btn_hit_right.png" id="2_i6gef"]
+[ext_resource type="Texture2D" uid="uid://n3ujiki3kuhk" path="res://assets/button/btn_left_one.png" id="3_408r0"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dc3ep")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.38431373)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 507.0
+offset_top = 535.0
+offset_right = 507.0
+offset_bottom = 535.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="ContinueButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_i6gef")
+stretch_mode = 3
+
+[node name="ExitButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_408r0")
+stretch_mode = 3

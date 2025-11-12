@@ -40,6 +40,11 @@ var is_penalized: bool = false
 @onready var penalty_timer = $PenaltyTimer
 @onready var reward_timer = $RewardTimer
 
+# --- AUDIO ---
+@onready var sfx_shoot = $SFX_Shoot
+@onready var sfx_hit = $SFX_Hit
+@onready var footstep_player = $FootstepPlayer #Footstep Player
+
 # --- VARIABEL LOGIKA TEMBAK ---
 var state = "idle"
 var is_in_shoot_mode = false
@@ -51,6 +56,10 @@ var arrow_keys = ["ui_up", "ui_down", "ui_left", "ui_right"]
 var potential_targets = []
 var locked_target = null
 var lock_on_instance = null
+
+#====Variable Footstep Player
+var footstep_timer := 0.0
+var footstep_interval := 0.3 # detik antar langkah
 
 # ======================================================================
 # READY
@@ -79,7 +88,7 @@ func _ready():
 # ======================================================================
 # PHYSICS PROCESS
 # ======================================================================
-func _physics_process(_delta):
+func _physics_process(delta):
 	if is_dead:
 		return
 
@@ -94,19 +103,32 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		move_and_slide()
 
+	# --- Animasi & Footstep ---
 	if state in ["idle", "walk"]:
 		if velocity.length() > 0:
 			state = "walk"
 			animated_sprite.play("walk")
+
+			# ✅ Footstep logic
+			footstep_timer += delta
+			if footstep_timer >= footstep_interval:
+				footstep_timer = 0.0
+				play_footstep()
 		else:
 			state = "idle"
 			animated_sprite.play("idle")
+			footstep_timer = 0.0  # reset timer kalau berhenti
 
+	# --- Arah hadap ---
 	if not is_frozen:
 		if velocity.x < 0:
 			animated_sprite.flip_h = false
 		elif velocity.x > 0:
 			animated_sprite.flip_h = true
+
+func play_footstep():
+	if not footstep_player.playing:
+		footstep_player.play()
 
 # ======================================================================
 # INPUT
@@ -176,6 +198,10 @@ func success_shot():
 		shooting_ui.hide()
 	if input_timer_display:
 		input_timer_display.visible = false
+	
+	# ✅ Play SFX
+	if sfx_shoot:
+		sfx_shoot.play()
 
 	print("REWARD: Kecepatan x1.5 selama 1 detik!")
 	speed = base_speed * 1.5
@@ -342,6 +368,8 @@ func _on_animated_sprite_animation_finished():
 		is_frozen = false
 		state = "idle"
 		animated_sprite.play("idle")
+		
+		
 
 	elif anim_name == "dead":
 		died.emit()
@@ -369,6 +397,11 @@ func take_damage(amount):
 	health -= amount
 	print("Player HP: ", health)
 	health_changed.emit(health)
+
+# 💢 Mainkan SFX saat kena hit
+	if sfx_hit:
+		sfx_hit.stop()  # biar suara nggak overlap kalau kena beruntun
+		sfx_hit.play()
 
 	if health <= 0 and not is_dead:
 		die()
@@ -437,3 +470,4 @@ func _on_penalty_timer_timeout():
 func _on_reward_timer_timeout():
 	speed = base_speed
 	print("Reward selesai. Kecepatan normal.")
+	

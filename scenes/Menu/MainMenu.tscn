@@ -1,0 +1,151 @@
+[gd_scene load_steps=15 format=3 uid="uid://lk7ediaqk2f"]
+
+[ext_resource type="Script" uid="uid://wpmurek6luvd" path="res://scripts/Menu/main_menu.gd" id="1_4fyr5"]
+[ext_resource type="Texture2D" uid="uid://5tc4cnrqdax1" path="res://assets/Background stage/Menu Assets/menubackground.jpg" id="2_4ms1j"]
+[ext_resource type="Texture2D" uid="uid://drgwfc6sep2ot" path="res://assets/button/btn_start.png" id="3_0n5pj"]
+[ext_resource type="Texture2D" uid="uid://dfoglpeu1fbyl" path="res://assets/button/btn-credit.png" id="4_i0awj"]
+[ext_resource type="Texture2D" uid="uid://drree4gyegsqm" path="res://assets/button/btn_exit.png" id="5_0n5pj"]
+[ext_resource type="Texture2D" uid="uid://i3s7ebyukqy4" path="res://assets/button/btn-tutorial.png" id="6_3m84m"]
+[ext_resource type="Texture2D" uid="uid://jgsmuke41y80" path="res://assets/Background stage/Menu Assets/logo-game.png" id="6_i0awj"]
+[ext_resource type="AudioStream" uid="uid://cxnpif4aq3wns" path="res://assets/Audio/main-menu.mp3" id="8_scfwc"]
+
+[sub_resource type="Animation" id="Animation_0n5pj"]
+resource_name = "hover_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0022),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i0awj"]
+resource_name = "hover_out"
+
+[sub_resource type="Animation" id="Animation_3m84m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_scfwc"]
+resource_name = "fade_in"
+
+[sub_resource type="Animation" id="Animation_4xcma"]
+resource_name = "fade_out"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scfwc"]
+_data = {
+&"RESET": SubResource("Animation_3m84m"),
+&"fade_in": SubResource("Animation_scfwc"),
+&"fade_out": SubResource("Animation_4xcma"),
+&"hover_in": SubResource("Animation_0n5pj"),
+&"hover_out": SubResource("Animation_i0awj")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4fyr5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4ms1j")
+
+[node name="FadeRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="TextureRect" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 21.0
+offset_right = 99.999756
+offset_bottom = 1329.7499
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_i0awj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -954.0
+offset_top = 16.0
+offset_right = 952.0
+offset_bottom = 1090.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="PlayButton" type="TextureButton" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_0n5pj")
+stretch_mode = 3
+
+[node name="CreditButton" type="TextureButton" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_i0awj")
+stretch_mode = 3
+
+[node name="TutorialButton" type="TextureButton" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_3m84m")
+stretch_mode = 3
+
+[node name="QuitButton" type="TextureButton" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_0n5pj")
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_scfwc")
+}
+
+[node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_scfwc")
+autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]

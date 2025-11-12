@@ -1,33 +1,40 @@
 extends Control
 
-@onready var play_button = $MenuContainer/VBoxContainer/PlayButton
-@onready var credits_button = $MenuContainer/VBoxContainer/CreditButton
-@onready var quit_button = $MenuContainer/VBoxContainer/QuitButton
-@onready var parallax_bg = $ParallaxBackground
-@onready var bgm_player = $BGMPlayer
+@onready var play_button: TextureButton = $MenuContainer/PlayButton
+@onready var tutorial_button: TextureButton = $MenuContainer/TutorialButton
+@onready var credit_button: TextureButton = $MenuContainer/CreditButton
+@onready var quit_button: TextureButton = $MenuContainer/QuitButton
+
+@onready var sfx_hover: AudioStreamPlayer = $AudioHover
+@onready var sfx_click: AudioStreamPlayer = $AudioClick
 
 func _ready():
-	# Connect button signals
-	play_button.pressed.connect(_on_play_pressed)
-	credits_button.pressed.connect(_on_credits_pressed)
-	quit_button.pressed.connect(_on_quit_pressed)
+	# kumpulkan semua tombol biar gak connect satu-satu manual
+	var buttons = [
+		play_button,
+		tutorial_button,
+		credit_button,
+		quit_button
+	]
 
-	# Play BGM if not already playing
-	if not bgm_player.playing:
-		bgm_player.play()
+	for btn in buttons:
+		btn.mouse_entered.connect(_on_button_hovered)
+		btn.pressed.connect(_on_button_pressed.bind(btn))
 
-func _on_play_pressed():
-	print("Play pressed!")
-	get_tree().change_scene_to_file("res://scenes/MainMenu/prologue.tscn")
+func _on_button_hovered():
+	if sfx_hover:
+		sfx_hover.play()
 
-func _on_credits_pressed():
-	print("Credits pressed!")
-	get_tree().change_scene_to_file("res://scenes/MainMenu/credits.tscn")
-
-func _on_quit_pressed():
-	print("Quit pressed!")
-	get_tree().quit()
-
-func _process(delta):
-	if parallax_bg:
-		parallax_bg.scroll_offset.x += 20 * delta
+func _on_button_pressed(button: TextureButton):
+	if sfx_click:
+		sfx_click.play()
+	
+	match button.name:
+		"PlayButton":
+			get_tree().change_scene_to_file("res://scenes/Prologue.tscn")
+		"TutorialButton":
+			get_tree().change_scene_to_file("res://scenes/Tutorial.tscn")
+		"CreditButton":
+			get_tree().change_scene_to_file("res://scenes/MainMenu/credits.tscn")
+		"QuitButton":
+			get_tree().quit()

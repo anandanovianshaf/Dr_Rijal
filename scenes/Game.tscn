@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://77cdepp1xcu2"]
+[gd_scene load_steps=24 format=3 uid="uid://2a4txohmhno6"]
 
 [ext_resource type="PackedScene" uid="uid://dlnr0n5l4fehd" path="res://scenes/Player.tscn" id="1_qbsmt"]
 [ext_resource type="PackedScene" uid="uid://dliucd6k8doqo" path="res://scenes/Virus.tscn" id="2_cpr0p"]
@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://64opa8qso355" path="res://scenes/objects/Pot2.tscn" id="14_r7sob"]
 [ext_resource type="PackedScene" uid="uid://7bqtbsehrsad" path="res://scenes/objects/Pot3.tscn" id="15_y5y3l"]
 [ext_resource type="PackedScene" uid="uid://cfy2xmqwm5vq" path="res://scenes/objects/Tree.tscn" id="16_vjgi4"]
-[ext_resource type="PackedScene" uid="uid://cw4473qkm20p3" path="res://scenes/objects/Pole.tscn" id="17_kyk2p"]
-[ext_resource type="PackedScene" uid="uid://jt6daak2futb" path="res://scenes/Potion.tscn" id="19_45i86"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Pole.tscn" id="17_kyk2p"]
+[ext_resource type="PackedScene" path="res://scenes/Potion.tscn" id="19_45i86"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjgi4"]
 size = Vector2(8360, 171)

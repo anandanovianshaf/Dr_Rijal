@@ -18,4 +18,4 @@ func _on_back_pressed():
 	tween.finished.connect(_go_back)
 
 func _go_back():
-	get_tree().change_scene_to_file("res://scenes/MainMenu/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://scenes/Menu/MainMenu.tscn")
