@@ -23,6 +23,10 @@ var arrow_textures = {
 	"ui_right_shiny": preload("res://assets/button/btn_hit_right.png")
 }
 
+var player1_frames = preload("res://assets/character 1/Player1.tres")
+var player2_frames = preload("res://assets/character 2/Player2.tres")
+var player3_frames = preload("res://assets/character 3/Player3.tres")
+
 @export var lock_on_scene: PackedScene
 var peluru_scene = preload("res://scenes/Bullet.tscn")
 
@@ -64,15 +68,39 @@ var footstep_interval := 0.3 # detik antar langkah
 # ======================================================================
 # READY
 # ======================================================================
+# ======================================================================
+# FUNGSI-FUNGSI BAWAAN GODOT
+# ======================================================================
+
 func _ready():
-	await get_tree().process_frame
-	base_speed = speed
+	# --- PERBAIKAN "RACE CONDITION" ---
+	# 1. TUNGGU 1 frame dulu.
+	# Ini memberi 'Stage2.gd' (induk) waktu untuk
+	# mengatur 'GameManager.current_stage = 2'.
+	await get_tree().process_frame 
+	# --- AKHIR PERBAIKAN ---
+
+	# --- 2. LOGIKA GANTI KOSTUM (SETELAH 'await') ---
+	# Sekarang kita cek GameManager. Nilainya PASTI sudah benar (2).
+	if GameManager.current_stage == 2:
+		# (Pastikan Anda sudah preload 'player2_frames' di atas)
+		$AnimatedSprite2D.sprite_frames = player2_frames
+		print("Memuat kostum Player 2")
+	else:
+		# (Pastikan Anda sudah preload 'player1_frames' di atas)
+		$AnimatedSprite2D.sprite_frames = player1_frames
+		print("Memuat kostum Player 1")
+	# --- AKHIR LOGIKA ---
+
+	# --- 3. Sisa kode _ready() Anda (aman untuk dijalankan sekarang) ---
+	base_speed = speed 
 
 	if lock_on_scene:
 		lock_on_instance = lock_on_scene.instantiate()
 		get_parent().add_child(lock_on_instance)
-		lock_on_instance.visible = false
+		lock_on_instance.visible = false 
 
+	# Hubungkan semua sinyal
 	shoot_cooldown_timer.timeout.connect(_on_shoot_cooldown_timeout)
 	input_timer.timeout.connect(_on_input_timer_timeout)
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
@@ -80,7 +108,7 @@ func _ready():
 	target_finder.body_exited.connect(_on_target_finder_body_exited)
 	penalty_timer.timeout.connect(_on_penalty_timer_timeout)
 	reward_timer.timeout.connect(_on_reward_timer_timeout)
-
+	
 	var settings = GameManager.get_current_stage_settings()
 	shoot_cooldown_timer.start(settings.cooldown_time)
 	health_changed.emit(health)
@@ -122,9 +150,9 @@ func _physics_process(delta):
 	# --- Arah hadap ---
 	if not is_frozen:
 		if velocity.x < 0:
-			animated_sprite.flip_h = false
-		elif velocity.x > 0:
 			animated_sprite.flip_h = true
+		elif velocity.x > 0:
+			animated_sprite.flip_h = false
 
 func play_footstep():
 	if not footstep_player.playing:

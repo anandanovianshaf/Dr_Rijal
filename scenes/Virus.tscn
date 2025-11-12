@@ -1,49 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dliucd6k8doqo"]
+[gd_scene load_steps=5 format=3 uid="uid://dliucd6k8doqo"]
 
 [ext_resource type="Script" uid="uid://dh1t4sadpsx0a" path="res://scripts/virus.gd" id="1_6tjwe"]
-[ext_resource type="Texture2D" uid="uid://dlviidyahydrc" path="res://assets/Monster/influenza-prajurit-mati.png" id="2_6tjwe"]
-[ext_resource type="Texture2D" uid="uid://ks5jhtfxgvuc" path="res://assets/Monster/influenza-prajurit.png" id="3_geebn"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r7g53"]
-atlas = ExtResource("2_6tjwe")
-region = Rect2(0, 0, 1024, 1024)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xj7ge"]
-atlas = ExtResource("2_6tjwe")
-region = Rect2(0, 0, 1024, 1024)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fmijv"]
-atlas = ExtResource("2_6tjwe")
-region = Rect2(0, 0, 1024, 1024)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mj3yn"]
-atlas = ExtResource("3_geebn")
-region = Rect2(0, 0, 1024, 1024)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ltkrk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r7g53")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xj7ge")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fmijv")
-}],
-"loop": false,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mj3yn")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://b01xntaf0gtov" path="res://assets/Monster/Virus3.tres" id="2_hc5xw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jilg7"]
 radius = 246.7
@@ -60,8 +18,8 @@ health = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-272, 234.57117)
 scale = Vector2(0.57226557, 0.57115006)
-sprite_frames = SubResource("SpriteFrames_ltkrk")
-animation = &"walk"
+sprite_frames = ExtResource("2_hc5xw")
+animation = &"dead"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,0 +1,60 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://bec2ww7nneahr"]
+
+[ext_resource type="Texture2D" uid="uid://djdhw70pp2km5" path="res://assets/peluru capsule/peluru capsule/vaksin-meledak.png" id="1_v6og8"]
+[ext_resource type="Texture2D" uid="uid://c60mcdbfcu5au" path="res://assets/peluru capsule/peluru capsule/vitamin-d-meledak.png" id="2_qmygl"]
+[ext_resource type="Texture2D" uid="uid://cud56jes808sl" path="res://assets/peluru capsule/peluru capsule/capsul-vaksin.png" id="3_pfo8w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtql2"]
+atlas = ExtResource("1_v6og8")
+region = Rect2(0, 0, 393, 393)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmygl"]
+atlas = ExtResource("1_v6og8")
+region = Rect2(393, 393, 393, 393)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfo8w"]
+atlas = ExtResource("1_v6og8")
+region = Rect2(393, 0, 393, 393)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mean"]
+atlas = ExtResource("1_v6og8")
+region = Rect2(0, 393, 393, 393)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2vo6"]
+atlas = ExtResource("2_qmygl")
+region = Rect2(0, 0, 408, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kvr4"]
+atlas = ExtResource("3_pfo8w")
+region = Rect2(0, 0, 600, 600)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtql2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmygl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfo8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mean")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2vo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kvr4")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]

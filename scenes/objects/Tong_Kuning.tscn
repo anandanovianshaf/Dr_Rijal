@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cphvc5o6wslv"]
+
+[ext_resource type="Texture2D" uid="uid://bi2wg4kf6fqr6" path="res://assets/backgrounds/Background Map 3/tong_kuning.png" id="1_smsbb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
+size = Vector2(25.250004, 31.64124)
+
+[node name="Tong" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_smsbb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.62500006, 6.1793823)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_cptd4")

@@ -1,55 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://d56n4y6f3h32"]
+[gd_scene load_steps=4 format=3 uid="uid://d56n4y6f3h32"]
 
 [ext_resource type="Script" uid="uid://mjfthbdxqudc" path="res://scripts/bullet.gd" id="1_p1sfj"]
-[ext_resource type="Texture2D" uid="uid://p0jnmiveh6k3" path="res://assets/peluru capsule/peluru capsule/vitamin-c-meledak.png" id="2_4utqk"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4s4u5"]
-atlas = ExtResource("2_4utqk")
-region = Rect2(420, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7281b"]
-atlas = ExtResource("2_4utqk")
-region = Rect2(0, 420, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u8st5"]
-atlas = ExtResource("2_4utqk")
-region = Rect2(420, 420, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7awvy"]
-atlas = ExtResource("2_4utqk")
-region = Rect2(0, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1rjr3"]
-atlas = ExtResource("2_4utqk")
-region = Rect2(420, 0, 420, 420)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3iaeh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4s4u5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7281b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u8st5")
-}],
-"loop": false,
-"name": &"explode",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7awvy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1rjr3")
-}],
-"loop": true,
-"name": &"fly",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://bec2ww7nneahr" path="res://assets/peluru capsule/Bullet3.tres" id="2_p1sfj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4s4u5"]
 radius = 57.286434
@@ -62,7 +14,9 @@ collision_layer = 4
 script = ExtResource("1_p1sfj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_3iaeh")
+position = Vector2(3.9999886, -1.9999962)
+scale = Vector2(1.0468628, 1.0468628)
+sprite_frames = ExtResource("2_p1sfj")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

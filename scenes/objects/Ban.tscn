@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfrcd4kprknsx"]
+
+[ext_resource type="Texture2D" uid="uid://3yivsp3mtwwg" path="res://assets/backgrounds/Background Map 3/ban.png" id="1_idbdg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
+size = Vector2(39.500004, 27.282475)
+
+[node name="Ban" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_idbdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.75, 2)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_cptd4")
