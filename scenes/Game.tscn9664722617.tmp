@@ -38,6 +38,7 @@ script = ExtResource("4_gw6i8")
 [node name="Player" parent="." instance=ExtResource("1_qbsmt")]
 z_index = 10
 position = Vector2(955, 586)
+speed = null
 
 [node name="Camera2D" type="Camera2D" parent="Player" groups=["camera"]]
 zoom = Vector2(0.5, 0.5)
@@ -48,7 +49,6 @@ limit_bottom = 3006
 
 [node name="Virus" parent="." instance=ExtResource("2_cpr0p")]
 position = Vector2(-1316, 682)
-speed = 250.0
 stopping_distance = 10.0
 
 [node name="GlobalTimer" type="Timer" parent="."]
@@ -272,12 +272,6 @@ shape = SubResource("RectangleShape2D_45i86")
 [node name="LeftWall" type="CollisionShape2D" parent="MapBorder"]
 position = Vector2(-3110, 700)
 shape = SubResource("RectangleShape2D_sv1m6")
-
-[node name="PauseMenu" parent="." instance=ExtResource("18_kyk2p")]
-offset_left = 378.687
-offset_top = -54.211975
-offset_right = 378.687
-offset_bottom = -54.211975
 
 [connection signal="health_changed" from="Player" to="BorderLayer/HUD" method="_on_player_health_changed"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

@@ -15,14 +15,14 @@ func get_current_stage_settings() -> Dictionary:
 				"arrow_count": 4,
 				"input_time": 3.0,
 				"cooldown_time": 2.0,
-				"max_enemies": 5
+				"max_enemies": 6
 			}
 		2:
 			# Stage 2: 6 panah, 4 detik, 4 detik cooldown
 			return {
 				"arrow_count": 6,
 				"input_time": 4.0,
-				"cooldown_time": 4.0,
+				"cooldown_time": 3.0,
 				"max_enemies": 8
 			}
 		3:
