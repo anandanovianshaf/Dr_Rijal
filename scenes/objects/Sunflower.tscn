@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://blhyqnhhwsvcv"]
+
+[ext_resource type="Texture2D" uid="uid://dmp7irtnnsx6p" path="res://assets/backgrounds/sunflower.png" id="1_jfqcl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ewg4y"]
+radius = 21.0
+height = 180.0
+
+[node name="Sunflower" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, -15)
+scale = Vector2(0.5310881, 0.53108805)
+texture = ExtResource("1_jfqcl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 22)
+shape = SubResource("CapsuleShape2D_ewg4y")
