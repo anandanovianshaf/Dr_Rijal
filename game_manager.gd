@@ -3,7 +3,6 @@ extends Node
 # Stage saat ini. Kita bisa ubah ini nanti saat pindah level
 # Untuk tes, kita bisa ganti manual angkanya (1, 2, atau 3)
 var current_stage: int = 1
-
 # Fungsi ini adalah "database" kesulitan kita.
 # Script lain (player) akan memanggil fungsi ini.
 func get_current_stage_settings() -> Dictionary:

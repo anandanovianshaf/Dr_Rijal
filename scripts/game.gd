@@ -6,6 +6,8 @@ extends Node2D
 @onready var stopwatch: Stopwatch = $Stopwatch
 @onready var timer_display: Label = $BorderLayer/TimerDisplay
 @onready var camera: Camera2D = $Camera2D
+@onready var pause_menu: Control = $PauseMenu
+
 
 var is_game_over: bool = false
 var initial_time: float = 60.0
@@ -94,16 +96,13 @@ func _go_to_game_over():
 func _process(_delta: float) -> void:
 	if camera and player:
 		camera.global_position = player.global_position
-<<<<<<< HEAD
-
 func _input(event):
 	if event.is_action_pressed("ui_cancel"): # default tombol Esc
 		if get_tree().paused:
 			pause_menu.hide_pause_menu()
 		else:
 			pause_menu.show_pause_menu()
-=======
-	
+
 	# Update tampilan countdown timer
 	if not is_game_over:
 		_update_timer_display()
@@ -131,4 +130,3 @@ func _update_timer_display() -> void:
 	var minutes = seconds / 60  # Integer division untuk mendapatkan menit
 	var secs = seconds % 60
 	timer_display.text = "%02d:%02d" % [minutes, secs]
->>>>>>> 2a33c129e73b3a1bc64157355d09fadee263be32
