@@ -5,8 +5,8 @@ extends Control
 @onready var credit_button: TextureButton = $MenuContainer/VBoxContainer/CreditButton
 @onready var quit_button: TextureButton = $MenuContainer/VBoxContainer/QuitButton
 
-@onready var sfx_hover: AudioStreamPlayer = $AudioStreamPlayer # Ganti nama node ke "AudioStreamPlayer"
-@onready var sfx_click: AudioStreamPlayer = $AudioStreamPlayer # Kalau mau pisah hover & click, duplikasi node ini
+@onready var sfx_hover: AudioStreamPlayer = $SFXHover # Ganti nama node ke "AudioStreamPlayer"
+@onready var sfx_click: AudioStreamPlayer = $SFXClick # Kalau mau pisah hover & click, duplikasi node ini
 
 func _ready():
 	# kumpulkan semua tombol biar efisien

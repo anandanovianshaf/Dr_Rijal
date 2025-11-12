@@ -35,9 +35,9 @@ func _on_player_health_changed(new_health: int) -> void:
 	print("GAME.GD: Player HP sekarang ", new_health)
 	
 	# HAPUS BLOK INI DARI SINI:
-	# if new_health <= 0:
-	# 	 is_game_over = true
-	# 	 _go_to_game_over()
+	 if new_health <= 0:
+	 	 is_game_over = true
+	 	 _go_to_game_over()
 
 # --- FUNGSI BARU ---
 # Fungsi ini HANYA akan dipanggil setelah animasi 'dead' Player selesai

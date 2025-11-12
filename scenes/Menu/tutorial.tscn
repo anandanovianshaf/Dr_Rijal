@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl1tbhxn28m2d"]
+[gd_scene load_steps=4 format=3 uid="uid://dl1tbhxn28m2d"]
 
 [ext_resource type="Script" uid="uid://bpxc3xi2sldcn" path="res://scripts/Menu/tutorial.gd" id="1_7c1ps"]
+[ext_resource type="Texture2D" uid="uid://hjlbfljhwi34" path="res://assets/Background stage/Menu Assets/tutorial.png" id="2_d1bdw"]
+[ext_resource type="Texture2D" uid="uid://n3ujiki3kuhk" path="res://assets/button/btn_left_one.png" id="3_hi1m5"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -28,8 +30,25 @@ anchor_bottom = 1.0
 offset_top = -939.0
 grow_horizontal = 2
 grow_vertical = 0
+texture = ExtResource("2_d1bdw")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Button_Back" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 812.0001
+offset_top = -1054.0
+offset_right = 1210.0
+offset_bottom = -656.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_hi1m5")
