@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://fnennii1igy7" path="res://assets/backgrounds/Rumah.png" id="1_wimj7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cptd4"]
-size = Vector2(601, 198.25)
+size = Vector2(601, 216.125)
 
 [node name="Rumah" type="StaticBody2D"]
 collision_layer = 7
@@ -13,5 +13,5 @@ collision_mask = 7
 texture = ExtResource("1_wimj7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-22, 47.125)
+position = Vector2(-25, 3.0625)
 shape = SubResource("RectangleShape2D_cptd4")

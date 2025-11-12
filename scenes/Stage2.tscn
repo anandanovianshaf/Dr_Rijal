@@ -227,10 +227,6 @@ scale = Vector2(4.9702907, 4.9702907)
 position = Vector2(-2676, 2738)
 scale = Vector2(4.9702907, 4.9702907)
 
-[node name="Mushroom1" parent="Objects" instance=ExtResource("14_8hl06")]
-position = Vector2(1257.0001, 2082)
-scale = Vector2(0.9105263, 0.9105263)
-
 [node name="Mushroom2" parent="Objects" instance=ExtResource("14_8hl06")]
 position = Vector2(2972.0002, 1908.9999)
 scale = Vector2(0.9105263, 0.9105263)
